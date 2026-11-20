@@ -1,0 +1,93 @@
+#!name=fmz200补充·美团大众点评抖音支付宝
+#!desc=从 fmz200 广告拦截&净化合集(blockAds, 2026-11-11版)摘出的可莉未覆盖部分：美团/美团外卖/大众点评/抖音/支付宝(仅1条)。摘录于2026-11-20，不随上游自动更新；原作者 fmz200。
+#!author=fmz200
+#!category=去广告补充
+
+[Rule]
+# > 抖音
+DOMAIN-KEYWORD,bds.snssdk.com,REJECT
+DOMAIN-KEYWORD,p3.pstatp.com,REJECT
+
+
+# > 美团
+DOMAIN-SUFFIX,meituan.xn,REJECT
+DOMAIN-SUFFIX,meituan.yoga,REJECT
+DOMAIN-SUFFIX,meituangov.cn,REJECT
+DOMAIN-SUFFIX,report.meituan.com,REJECT
+DOMAIN-SUFFIX,analytics.meituan.net,REJECT
+DOMAIN-SUFFIX,wmlog.meituan.com,REJECT
+DOMAIN-SUFFIX,ad.e.waimai.sankuai.com,REJECT
+DOMAIN-SUFFIX,mads.meituan.com,REJECT
+DOMAIN-SUFFIX,dreport.meituan.net,REJECT
+DOMAIN-SUFFIX,d.meituan.net,REJECT
+
+
+# > 支付宝（fmz 合集里仅此 1 条）
+DOMAIN-SUFFIX,ynuf.alipay.com,REJECT
+
+[URL Rewrite]
+# > 大众点评
+# hostname = 103.37.155.60, *.dianping.com, img.meituan.net, p.meituan.com, rms.meituan.com, www.dpfile.com, awp-assets.meituan.net, s3plus.meituan.net, p*.meituan.net, ddplus.meituan.net
+# 开屏广告
+^https?:\/\/103\.37\.155\.60\/fetch - reject
+^https?:\/\/catdot\.dianping\.com\/broker-service\/hijack - reject
+^https?:\/\/mapi\.dianping\.com\/mapi\/operating\/(?>indexopsmodules|loadsplashconfig) - reject
+^https?:\/\/mapi\.dianping\.com\/wdrpreload\/userprediction - reject
+^https?:\/\/mapi\.dianping\.com\/adshopping - reject
+^https?:\/\/p\.meituan\.com\/api\/privacy\/config - reject
+^https?:\/\/www\.dpfile\.com\/app\/fecommonservice-lottie\/ugc-write-done\/media - reject
+^https?:\/\/www\.dpfile\.com\/picasso\/picasso-qa\/src\/AnswerList\/AnswerList-bundle - reject
+^https?:\/\/www\.dpfile\.com\/sc\/indexpromotion - reject
+^https?:\/\/catfront\.dianping\.com\/api\/metric\?v=\d&p=rn_gcbu_mrn-joy-poidetail - reject
+^https?:\/\/awp-assets\.meituan\.net\/hfe\/fep\/\w+\.json - reject
+^https?:\/\/s3plus\.meituan\.net\/ocean-blk-index\/index\/blk_conf - reject
+^https?:\/\/ddplus\.meituan\.net\/v\d\/mss_\w+\/(?>ehc|titansx|ddblue|edfu)\/ - reject
+
+
+[Map Local]
+# > 大众点评
+# hostname = 103.37.155.60, *.dianping.com, img.meituan.net, p.meituan.com, rms.meituan.com, www.dpfile.com, awp-assets.meituan.net, s3plus.meituan.net, p*.meituan.net, ddplus.meituan.net
+^https?:\/\/mapi\.dianping\.com\/mapi\/intelliindex data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+^https?:\/\/img\.meituan\.net\/goodsawardpic\/\w+\.gif data-type=tiny-gif status-code=200
+
+^https?:\/\/rms\.meituan\.com\/api\/v\d\/rmsmina\/c\/queryWechatAdvertisement data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+^https?:\/\/p\d\.meituan\.net\/nrpresourcevenus\/\w+\.gif data-type=tiny-gif status-code=200
+
+^https?:\/\/p\d\.meituan\.net\/travelcube\/(?!c129a661)\w+\.gif data-type=tiny-gif status-code=200
+
+
+# > 美团 & 美团外卖
+# hostname = img.meituan.net, s3plus.meituan.net, flowplus.meituan.net
+^https?:\/\/wmapi\.meituan\.com\/api\/v7\/(loadInfo|openscreen|startpicture)\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+^https?:\/\/(s3plus|flowplus)\.meituan\.net\/v\d\/\w+\/linglong\/\w+\.(gif|jpg|mp4) data-type=tiny-gif status-code=200
+
+^https?:\/\/img\.meituan\.net\/bizad\/bizad_brandCpt_\d+\.jpg data-type=tiny-gif status-code=200
+
+^https?:\/\/img\.meituan\.net\/goodsawardpic\/[a-f0-9]+\.png\.webp data-type=tiny-gif status-code=200
+
+^https?:\/\/s3plus\.meituan\.net\/ocean-blk-index\/index\/blk_conf_73\.json data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+^https?:\/\/s3plus\.meituan\.net\/v1\/mss_\w+\/(brandcpt-vedio|waimai-alita)\/\w+\.zip$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+^http:\/\/59\.82\.113\.10\/amdc\/mobileDispatch\?appkey=213807& data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+
+# > 美团充电宝小程序
+# hostname = cdb.meituan.com
+^https?:\/\/cdb\.meituan\.com\/marketing\/source\/getPageSlotList data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+
+[Script]
+# > 大众点评
+# hostname = 103.37.155.60, *.dianping.com, img.meituan.net, p.meituan.com, rms.meituan.com, www.dpfile.com, awp-assets.meituan.net, s3plus.meituan.net, p*.meituan.net, ddplus.meituan.net
+# 开屏广告
+大众点评 = type=http-response, pattern=^https?:\/\/img\.meituan\.net\/(?>dpmobile|goodsawardpic)\/, script-path=https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Scripts/AntiAd/dianping.js, requires-body=true, timeout=60
+
+大众点评 = type=http-response, pattern=^https?:\/\/ddplus\.meituan\.net\/v\d\/mss_\w+\/picassovc, script-path=https://raw.githubusercontent.com/zirawell/R-Store/main/Res/Scripts/AntiAd/dianping.js, requires-body=true, timeout=60
+
+
+[MITM]
+hostname = *.dianping.com, 103.37.155.60, awp-assets.meituan.net, cdb.meituan.com, ddplus.meituan.net, flowplus.meituan.net, img.meituan.net, p*.meituan.net, p.meituan.com, rms.meituan.com, s3plus.meituan.net, wmapi.meituan.com, www.dpfile.com
