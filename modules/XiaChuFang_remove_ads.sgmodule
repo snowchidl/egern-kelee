@@ -1,0 +1,17 @@
+#!name=下厨房去广告（Egern转换版）
+#!desc=移除开屏广告、页面推广及横幅，精简首页标签。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://api\.xiachufang\.com/v2/ad/ reject-dict
+^https://api\.xiachufang\.com/v2/account/feeds_v7\.json reject-dict
+^https://api\.xiachufang\.com/v2/homepage1810/init_page\.json reject-dict
+^https://api\.xiachufang\.com/v2/mark_mission/get_sticker_info\.json reject-dict
+
+[Script]
+XiaChuFang_remove_ads-op0 = type=http-response, pattern=^https://api\.xiachufang\.com/v2/homepage/paged_waterfall_recommendations\.json$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/XiaChuFang_remove_ads.js, requires-body=1, argument=0
+XiaChuFang_remove_ads-op1 = type=http-response, pattern=^https://api\.xiachufang\.com/v2/config/get\.json$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/XiaChuFang_remove_ads.js, requires-body=1, argument=1
+XiaChuFang_remove_ads-op2 = type=http-response, pattern=^https://api\.xiachufang\.com/v2/homepage/ranking_list/paged_homepage_ranking_list_section_v2\.json$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/XiaChuFang_remove_ads.js, requires-body=1, argument=2
+
+[MITM]
+hostname = %APPEND% api.xiachufang.com

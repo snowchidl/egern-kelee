@@ -1,0 +1,19 @@
+#!name=Jump去广告（Egern转换版）
+#!desc=移除Jump开屏广告｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+DOMAIN, zlsdk.1rtb.net, REJECT
+DOMAIN, jp.ad.gameley.com, REJECT
+DOMAIN, toblog.ctobsnssdk.com, REJECT
+DOMAIN, s3plus.meituan.net, REJECT
+DOMAIN, images.pinduoduo.com, REJECT
+DOMAIN, qh-material.taobao.com, REJECT
+DOMAIN-SUFFIX, admobile.top, REJECT
+
+[Script]
+Jump_remove_ads-op0 = type=http-response, pattern=^https:?//switch.jumpvg.com/jump/getlaunchad/v2$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Jump_remove_ads.js, requires-body=1, argument=0
+Jump_remove_ads-op1 = type=http-response, pattern=^https:?//switch.jumpvg.com/jump/recommend/ad_conf$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Jump_remove_ads.js, requires-body=1, argument=1
+
+[MITM]
+hostname = %APPEND% switch.jumpvg.com

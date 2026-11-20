@@ -1,0 +1,10 @@
+#!name=自动加入TestFlight（Egern转换版）
+#!desc=自动监控TestFlight名额，一旦有新的名额即刻加入。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+DOMAIN, testflight.apple.com, PROXY
+
+[Script]
+获取账号令牌 = type=http-request, pattern=^https?://testflight\.apple\.com/v3/accounts/.*/apps$, script-path=https://raw.githubusercontent.com/CodeApe-Xiaoyin/loon-plugins/kelee-snapshot-2026-11-10/vendor/kelee/resources/kelee.one/Resource/JavaScript/TestFlight/CaptureAccountToken.js
+

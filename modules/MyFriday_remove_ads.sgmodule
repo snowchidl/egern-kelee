@@ -1,0 +1,8 @@
+#!name=超级课程表去广告（Egern转换版）
+#!desc=移除开屏广告、首页头图、悬浮挂件。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+DOMAIN, ad.myfriday.cn, REJECT
+IP-CIDR, 182.92.244.70/32, REJECT, no-resolve
+

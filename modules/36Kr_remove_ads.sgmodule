@@ -1,0 +1,26 @@
+#!name=36氪去广告（Egern转换版）
+#!desc=移除开屏广告、首页右上角运营位、信息流广告、文末广告，移除相关文章推荐、大家都在看及皮肤配置，精简搜索页面、我的页面及底栏。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+DOMAIN, adx.36kr.com, REJECT
+DOMAIN, ad.jiemian.com, REJECT
+
+[URL Rewrite]
+^https://gateway\.36kr\.com/api/mis/nav/me/recom\? reject-dict
+^https://gateway\.36kr\.com/api/mis/nav/search/hotword\? reject-dict
+^https://gateway\.36kr\.com/api/mis/nav/search/topicListV2\? reject-dict
+^https://gateway\.36kr\.com/api/adx/ reject-dict
+^https://gateway\.36kr\.com/api/mis/page/article/recom\? reject-dict
+^https://gateway\.36kr\.com/api/mis/page/newsflash/recom\? reject-dict
+^https://gateway\.36kr\.com/api/mis/sys/skin/ reject-dict
+
+[Script]
+36Kr_remove_ads-op0 = type=http-response, pattern=^https://gateway\.36kr\.com/api/mis/sys/config\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/36Kr_remove_ads.js, requires-body=1, argument=0
+36Kr_remove_ads-op1 = type=http-response, pattern=^https://36kr\.com/global/sensors/config/iOS\.conf\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/36Kr_remove_ads.js, requires-body=1, argument=1
+36Kr_remove_ads-op2 = type=http-response, pattern=^https://gateway\.36kr\.com/api/mis/nav\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/36Kr_remove_ads.js, requires-body=1, argument=2
+36Kr_remove_ads-op3 = type=http-response, pattern=^https://gateway\.36kr\.com/api/mis/nav/home/subnav/recom\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/36Kr_remove_ads.js, requires-body=1, argument=3
+36Kr_remove_ads-op4 = type=http-response, pattern=^https://gateway\.36kr\.com/api/mis/nav/home/subnav/flow/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/36Kr_remove_ads.js, requires-body=1, argument=4
+
+[MITM]
+hostname = %APPEND% gateway.36kr.com, 36kr.com

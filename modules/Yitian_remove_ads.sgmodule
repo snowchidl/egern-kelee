@@ -1,0 +1,13 @@
+#!name=一甜相机去广告（Egern转换版）
+#!desc=移除开屏广告、悬浮广告及图片选择器横幅广告。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://(m2u-api\.getkwai|api-m2u\.kuaishou)\.com/api-server/api/v1/ad/ reject-dict
+^https://(m2u-api\.getkwai|api-m2u\.kuaishou)\.com/api-server/api/v4/op/actPositions\? reject-dict
+
+[Script]
+Yitian_remove_ads-op0 = type=http-response, pattern=^https://(m2u-api\.getkwai|api-m2u\.kuaishou)\.com/api-server/api/v1/system/configs\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Yitian_remove_ads.js, requires-body=1, argument=0
+
+[MITM]
+hostname = %APPEND% m2u-api.getkwai.com, api-m2u.kuaishou.com

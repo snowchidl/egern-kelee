@@ -1,0 +1,9 @@
+#!name=123云盘去广告（Egern转换版）
+#!desc=移除开屏广告、应用内横幅广告。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://www\.123pan\.com/api/config/get reject-dict
+
+[MITM]
+hostname = %APPEND% www.123pan.com

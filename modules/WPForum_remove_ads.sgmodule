@@ -1,0 +1,12 @@
+#!name=威锋去广告（Egern转换版）
+#!desc=移除开屏广告、信息流广告、文末广告、首页轮播图推广。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://api\.wfdata\.club/v2/yesfeng/yesList\? reject-dict
+
+[Script]
+WPForum_remove_ads-op0 = type=http-response, pattern=^https://api\.wfdata\.club/v2/yesfeng/slideshow\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/WPForum_remove_ads.js, requires-body=1, argument=0
+
+[MITM]
+hostname = %APPEND% api.wfdata.club

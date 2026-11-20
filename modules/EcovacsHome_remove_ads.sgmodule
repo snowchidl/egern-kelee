@@ -1,0 +1,13 @@
+#!name=ECOVACS HOME去广告（Egern转换版）
+#!desc=移除横幅推广，精简底栏。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://api-app\.dc-cn\.cn\.ecouser\.net/api/ecms/app/ad/ reject-dict
+^https://gl-cn-api\.ecovacs\.cn/v1/private/ reject-dict
+
+[Script]
+EcovacsHome_remove_ads-op0 = type=http-response, pattern=^https://gl-cn-api\.ecovacs\.cn/v3/private/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/EcovacsHome_remove_ads.js, requires-body=1, argument=0
+
+[MITM]
+hostname = %APPEND% gl-cn-api.ecovacs.cn, api-app.dc-cn.cn.ecouser.net

@@ -1,0 +1,22 @@
+#!name=盒马去广告（Egern转换版）
+#!desc=移除开屏广告、首页信息流广告及推广、弹窗广告、悬浮挂件、商品及购物车推荐，精简底栏及我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://acs-m\.freshippo\.com/gw/mtop\.wdk\.render\.querysinglepage/ reject-dict
+^https://acs-m\.freshippo\.com/gw/mtop\.wdk\.sg\.queryinnerpage/ reject-dict
+^https://acs-m\.freshippo\.com/gw/mtop\.wdk\.lbs\.address\.getshopinfolist/ reject-dict
+^https://acs-m\.freshippo\.com/gw/mtop\.wdk\.render\.querysearchpage/ reject-dict
+^https://acs-m\.freshippo\.com/gw/mtop\.wdk\.sg\.querysinglescene/ reject-dict
+^https://acs-m\.freshippo\.com/gw/mtop\.wdk\.melon\.collocation/ reject-dict
+^https://acs-m\.freshippo\.com/gw/mtop\.wdk\.fc\.recommend\.feedscommondservice/ reject-dict
+
+[Script]
+MrHema_remove_ads-op0 = type=http-response, pattern=^https://acs-m\.freshippo\.com/gw/mtop\.wdk\.render\.queryindexpage/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/MrHema_remove_ads.js, requires-body=1, argument=0
+MrHema_remove_ads-op1 = type=http-response, pattern=^https://acs-m\.freshippo\.com/gw/mtop\.wdk\.render\.querytabfeedstream/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/MrHema_remove_ads.js, requires-body=1, argument=1
+MrHema_remove_ads-op2 = type=http-response, pattern=^https://acs-m\.freshippo\.com/gw/(mtop\.wdk\.render\.querychannelpage|mtop\.wdk\.render\.querysinglepage)/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/MrHema_remove_ads.js, requires-body=1, argument=2
+MrHema_remove_ads-op3 = type=http-response, pattern=^https://acs-m\.freshippo\.com/gw/mtop\.wdk\.render\.querymypage/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/MrHema_remove_ads.js, requires-body=1, argument=3
+MrHema_remove_ads-op4 = type=http-response, pattern=^https://acs-m\.freshippo\.com/gw/(mtop\.wdk\.lbs\.location\.shopdecideapi\.decideformain|mtop\.wdk\.lbs\.location\.shopdecideapi\.decidebygeocode)/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/MrHema_remove_ads.js, requires-body=1, argument=4
+
+[MITM]
+hostname = %APPEND% acs-m.freshippo.com

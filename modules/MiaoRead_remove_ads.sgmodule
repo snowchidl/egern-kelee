@@ -1,0 +1,9 @@
+#!name=小喵看书去广告（Egern转换版）
+#!desc=移除小喵看书章末广告｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://api\.miaomiaoyd\.com/book/config/getAdsSettings$ reject
+
+[MITM]
+hostname = %APPEND% api.miaomiaoyd.com

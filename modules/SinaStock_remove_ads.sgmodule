@@ -1,0 +1,21 @@
+#!name=新浪财经去广告（Egern转换版）
+#!desc=移除开屏广告、弹窗广告、横幅广告、信息流广告，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://news\.cj\.sina\.cn/search/tips\? reject-dict
+^https://search\.cj\.sina\.cn/stock/get_index_new\? reject-dict
+^https://news\.cj\.sina\.cn/search/tips\? reject-dict
+^https://recommend\.cj\.sina\.cn/app/v2/search/discovery$ reject-dict
+^https://quotes\.sina\.com\.cn/cn/api/openapi\.php/PriceChangeService\.getSearchList\? reject-dict
+
+[Script]
+SinaStock_remove_ads-op0 = type=http-response, pattern=^https://news\.cj\.sina\.cn/app/v1/news724/list\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/SinaStock_remove_ads.js, requires-body=1, argument=0
+SinaStock_remove_ads-op1 = type=http-response, pattern=^https://app\.cj\.sina\.com\.cn/apps/api/user/center\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/SinaStock_remove_ads.js, requires-body=1, argument=1
+SinaStock_remove_ads-op2 = type=http-response, pattern=^https://news\.cj\.sina\.cn/toutiao/content\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/SinaStock_remove_ads.js, requires-body=1, argument=2
+SinaStock_remove_ads-op3 = type=http-response, pattern=^https://app\.cj\.sina\.com\.cn/api/deal/index\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/SinaStock_remove_ads.js, requires-body=1, argument=3
+SinaStock_remove_ads-op4 = type=http-response, pattern=^https://app\.cj\.sina\.com\.cn/clientSetting/api/start/init\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/SinaStock_remove_ads.js, requires-body=1, argument=4
+SinaStock_remove_ads-op5 = type=http-response, pattern=^https://(newscj\.xincai\.com|news\.cj\.sina\.cn)/app/v1/feed\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/SinaStock_remove_ads.js, requires-body=1, argument=5
+
+[MITM]
+hostname = %APPEND% app.cj.sina.com.cn, news.cj.sina.cn, search.cj.sina.cn, recommend.cj.sina.cn, quotes.sina.com.cn, newscj.xincai.com

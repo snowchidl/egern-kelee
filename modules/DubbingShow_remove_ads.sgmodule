@@ -1,0 +1,13 @@
+#!name=配音秀去广告（Egern转换版）
+#!desc=移除开屏广告、弹窗、横幅、各类关注推荐。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Script]
+DubbingShow_remove_ads-op0 = type=http-response, pattern=^https://iosapi\.peiyinxiu\.com/Api/live/LiveList, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DubbingShow_remove_ads.js, requires-body=1, argument=0
+DubbingShow_remove_ads-op1 = type=http-response, pattern=^https://iosapi\.peiyinxiu\.com/api/live/FollowList, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DubbingShow_remove_ads.js, requires-body=1, argument=1
+DubbingShow_remove_ads-op2 = type=http-response, pattern=^https://iosapi\.peiyinxiu\.com/Api/Friend/GetRecommendUsers, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DubbingShow_remove_ads.js, requires-body=1, argument=2
+DubbingShow_remove_ads-op3 = type=http-response, pattern=^https://iosapi\.peiyinxiu\.com/api/Union/HomeData, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DubbingShow_remove_ads.js, requires-body=1, argument=3
+移除首页底部弹窗 = type=http-response, pattern=^https://iosapi\.peiyinxiu\.com/Api/Film/GetConfigValue, script-path=https://raw.githubusercontent.com/CodeApe-Xiaoyin/loon-plugins/kelee-snapshot-2026-11-10/vendor/kelee/resources/kelee.one/Resource/JavaScript/DubbingShow/DubbingShow_remove_ads.js, requires-body=1
+
+[MITM]
+hostname = %APPEND% iosapi.peiyinxiu.com

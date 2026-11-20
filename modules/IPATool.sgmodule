@@ -1,0 +1,10 @@
+#!name=IPA工具箱助手（Egern转换版）
+#!desc=这是IPA工具箱的辅助插件，用于下载IPA包和应用降级。IPA工具箱是运行在Scripting应用中的脚本，需要购买Scripting的Pro版本才能运行。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Script]
+App Store API = type=http-request, pattern=^https://apple-api\.com, script-path=https://raw.githubusercontent.com/CodeApe-Xiaoyin/loon-plugins/kelee-snapshot-2026-11-10/vendor/kelee/resources/kelee.one/Resource/JavaScript/IPATool/AppStoreAPI.js, requires-body=1
+安装器 = type=http-request, pattern=^https://xiaobai\.app, script-path=https://raw.githubusercontent.com/CodeApe-Xiaoyin/loon-plugins/kelee-snapshot-2026-11-10/vendor/kelee/resources/kelee.one/Resource/JavaScript/IPATool/Installer.js
+
+[MITM]
+hostname = %APPEND% apple-api.com, xiaobai.app

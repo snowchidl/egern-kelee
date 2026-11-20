@@ -1,0 +1,7 @@
+#!name=蜗牛睡眠去广告（Egern转换版）
+#!desc=移除音乐页面横幅、日报告解决方案商品推广，移除我的页面服务推广。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+DOMAIN, ad.snailsleep.net, REJECT
+

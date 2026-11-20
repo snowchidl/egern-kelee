@@ -1,0 +1,10 @@
+#!name=每日赛车去广告（Egern转换版）
+#!desc=移除开屏广告、信息流广告。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Script]
+MeiRiSaiChe_remove_ads-op0 = type=http-response, pattern=^https://api\.romielf\.com/index/indexv\d\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/MeiRiSaiChe_remove_ads.js, requires-body=1, argument=0
+MeiRiSaiChe_remove_ads-op1 = type=http-response, pattern=^https://api\.romielf\.com/index/indexv\d\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/MeiRiSaiChe_remove_ads.js, requires-body=1, argument=1
+
+[MITM]
+hostname = %APPEND% api.romielf.com

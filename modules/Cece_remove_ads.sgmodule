@@ -1,0 +1,29 @@
+#!name=测测去广告（Egern转换版）
+#!desc=移除开屏广告、活动皮肤、各类弹窗及横幅、金刚位红点文字，精简首页标签及搜索页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://api\.cece\.com/user/index/banners\? reject-dict
+^https://api\.cece\.com/ask/ai_chat/popup\? reject-dict
+^https://api\.cece\.com/user/popup/ reject-dict
+^https://api\.cece\.com/chart/easter_egg/popup\? reject-dict
+^https://api\.cece\.com/user/register_task/notice_task\? reject-dict
+^https://api\.cece\.com/ask/ask/alert_minus\? reject-dict
+^https://api\.cece\.com/msgAsk/question/new_coupon_status\? reject-dict
+^https://api\.cece\.com/user/user/myPageBanner\? reject-dict
+^https://api\.cece\.com/live/recommend/new_user\? reject-dict
+^https://api\.cece\.com/chart/tools/get_search_recommend\? reject-dict
+^https://api\.cece\.com/user/rank/list\? reject-dict
+^https://api\.cece\.com/chart/config/chart_activity\? reject-dict
+
+[Script]
+Cece_remove_ads-op0 = type=http-response, pattern=^https://api\.cece\.com/user/init\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Cece_remove_ads.js, requires-body=1, argument=0
+Cece_remove_ads-op1 = type=http-response, pattern=^https://api\.cece\.com/common/app/app_config\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Cece_remove_ads.js, requires-body=1, argument=1
+Cece_remove_ads-op2 = type=http-response, pattern=^https://api\.cece\.com/common/app/app_config\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Cece_remove_ads.js, requires-body=1, argument=2
+Cece_remove_ads-op3 = type=http-response, pattern=^https://api\.cece\.com/chart/tools/home_10_tools\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Cece_remove_ads.js, requires-body=1, argument=3
+Cece_remove_ads-op4 = type=http-response, pattern=^https://api\.cece\.com/user/index/tab_list\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Cece_remove_ads.js, requires-body=1, argument=4
+Cece_remove_ads-op5 = type=http-response, pattern=^https://api\.cece\.com/common/app/risk_entrance\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Cece_remove_ads.js, requires-body=1, argument=5
+Cece_remove_ads-op6 = type=http-response, pattern=^https://api\.cece\.com/live/user/coupon_tab\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Cece_remove_ads.js, argument=6
+
+[MITM]
+hostname = %APPEND% api.cece.com

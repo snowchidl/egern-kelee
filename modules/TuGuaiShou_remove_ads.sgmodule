@@ -1,0 +1,11 @@
+#!name=图怪兽去广告（Egern转换版）
+#!desc=移除开屏广告、弹窗广告、各页面横幅推广。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://api\.818ps\.com/v4/advertisement/ reject-dict
+^https://api\.818ps\.com/v4/popup/ reject-dict
+^https://api\.818ps\.com/v4/festival/newYear/pop\? reject-dict
+
+[MITM]
+hostname = %APPEND% api.818ps.com

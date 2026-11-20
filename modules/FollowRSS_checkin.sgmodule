@@ -1,0 +1,6 @@
+#!name=Follow每日签到（Egern转换版）
+#!desc=Follow每日签到，需要进入此插件的主页链接，阅读使用说明操作。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[MITM]
+hostname = %APPEND% api.follow.is

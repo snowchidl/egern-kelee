@@ -1,0 +1,39 @@
+#!name=喜马拉雅去广告（Egern转换版）
+#!desc=移除开屏广告、播放器广告、各类推荐内容，精简频道和我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+DOMAIN, adse.ximalaya.com, REJECT
+DOMAIN, adsehera.ximalaya.com, REJECT
+DOMAIN, adse.wsa.ximalaya.com, REJECT
+DOMAIN, adbehavior.ximalaya.com, REJECT
+DOMAIN, adbehavior.wsa.ximalaya.com, REJECT
+
+[URL Rewrite]
+^https://(search|searchwsa)\.ximalaya\.com/hub/(guideWord|hotWord)V\d/ reject-dict
+^https://(mobile|mobilehera|mobwsa)\.ximalaya\.com/discovery-feed/v\d/scene/listen/refresh\? reject-dict
+^https://(m|mwsa)\.ximalaya\.com/x-web-activity/signIn/getHomePageSignInInfo/ reject-dict
+^https://(mobile|mobilehera|mobwsa)\.ximalaya\.com/subscribe/v\d/subscribe/tagAlbumList$ reject-dict
+^https://(mobile|mobilehera|mobwsa)\.ximalaya\.com/track-feed/v\d/chase/recommend/ reject-dict
+^https://(mobile|mobilehera|mobwsa)\.ximalaya\.com/social-web/follow-stream/category/\d+$ reject-dict
+^https://(mobile|mobilehera|mobwsa)\.ximalaya\.com/mobile-playpage/playpage/recommendContentV\d/ reject-dict
+^https://(mobile|mobilehera|mobwsa)\.ximalaya\.com/mobile-playpage/playpage/recommend/resource/allocation/ reject-dict
+^https://(mobile|mobilehera|mobwsa)\.ximalaya\.com/firework-portal/v\d+/sync\? reject-dict
+^https://(mobile|mobilehera|mobwsa)\.ximalaya\.com/business-sale-promotion-guide-mobile-web/popup/ reject-dict
+^https://(mobile|mobilehera|mobwsa)\.ximalaya\.com/app-skin-service/skin/setting/info/ reject-dict
+^https://(live|livewsa)\.ximalaya\.com/lamia/v1/subscribe/status$ reject-dict
+^https://(mobile|mobilehera|mobwsa)\.ximalaya\.com/subscribe/v\d/subscribe/recommend\? reject-dict
+^https://(mobile|mobilehera|mobwsa)\.ximalaya\.com/mobile-user/v\d/purchased/recommend/ reject-dict
+
+[Script]
+Himalaya_remove_ads-op0 = type=http-response, pattern=^https://(mobile|mobilehera|mobwsa)\.ximalaya\.com/discovery-feed/v\d/mix/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Himalaya_remove_ads.js, requires-body=1, argument=0
+Himalaya_remove_ads-op1 = type=http-response, pattern=^https://(mobile|mobilehera|mobwsa)\.ximalaya\.com/discovery-category/customCategories/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Himalaya_remove_ads.js, requires-body=1, argument=1
+Himalaya_remove_ads-op2 = type=http-response, pattern=^https://(mobile|mobilehera|mobwsa)\.ximalaya\.com/football-portal/diff2/batch\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Himalaya_remove_ads.js, requires-body=1, argument=2
+Himalaya_remove_ads-op3 = type=http-response, pattern=^https://(mobile|mobilehera|mobwsa)\.ximalaya\.com/nexus-web/v\d/tabs/customTabs\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Himalaya_remove_ads.js, requires-body=1, argument=3
+Himalaya_remove_ads-op4 = type=http-response, pattern=^https://(m|mwsa)\.ximalaya\.com/community/square/v\d/stream\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Himalaya_remove_ads.js, argument=4
+Himalaya_remove_ads-op5 = type=http-response, pattern=^https://mobwsa\.ximalaya\.com/mobile-playpage/playpage/tabs/v2/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Himalaya_remove_ads.js, requires-body=1, argument=5
+Himalaya_remove_ads-op6 = type=http-response, pattern=^https://(mobile|mobilehera|mobwsa)\.ximalaya\.com/mobile-user/v\d/homePage/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Himalaya_remove_ads.js, requires-body=1, argument=6
+Himalaya_remove_ads-op7 = type=http-response, pattern=^https://(mobile|mobilehera|mobwsa)\.ximalaya\.com/mobile-user/v\d/homePage/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Himalaya_remove_ads.js, requires-body=1, argument=7
+
+[MITM]
+hostname = %APPEND% gslbali.ximalaya.com, search.ximalaya.com, searchwsa.ximalaya.com, mobile.ximalaya.com, mobilehera.ximalaya.com, mobwsa.ximalaya.com, m.ximalaya.com, mwsa.ximalaya.com

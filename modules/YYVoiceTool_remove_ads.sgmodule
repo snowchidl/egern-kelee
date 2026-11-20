@@ -1,0 +1,15 @@
+#!name=YY语音去广告（Egern转换版）
+#!desc=移除开屏广告、应用内弹窗、任务推广、频道横幅推广，精简广场顶部标签。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://yuyin-api\.baizhanlive\.com/homepage/flashscreen/get\? reject-dict
+^https://yuyin-api\.baizhanlive\.com/homepage/homepage/banner\? reject-dict
+^https://web\.yy\.com/yyvoice_task_sys/bar\.html\? reject
+^https://yuyin-api\.baizhanlive\.com/search/search/hotword\? reject-dict
+
+[Script]
+YYVoiceTool_remove_ads-op0 = type=http-response, pattern=^https://yuyin-api\.baizhanlive\.com/postsquare/college/page/tabsV3\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/YYVoiceTool_remove_ads.js, requires-body=1, argument=0
+
+[MITM]
+hostname = %APPEND% yuyin-api.baizhanlive.com, web.yy.com

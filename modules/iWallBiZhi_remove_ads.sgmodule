@@ -1,0 +1,15 @@
+#!name=最美壁纸去广告（Egern转换版）
+#!desc=移除悬浮广告、横幅广告、轮播图广告，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://api\.fzxhmy\.com/seek/trendingword\? reject-dict
+^https://api\.fzxhmy\.com/tone/trending\? reject-dict
+
+[Script]
+移除首页广告配置 = type=http-response, pattern=^https://api\.fzxhmy\.com/core/initialize\?, script-path=https://raw.githubusercontent.com/CodeApe-Xiaoyin/loon-plugins/kelee-snapshot-2026-11-10/vendor/kelee/resources/kelee.one/Resource/JavaScript/iWallBiZhi/core_initialize.js, requires-body=1
+移除首页轮播图广告 = type=http-response, pattern=^https://api\.fzxhmy\.com/landing/initialize\?, script-path=https://raw.githubusercontent.com/CodeApe-Xiaoyin/loon-plugins/kelee-snapshot-2026-11-10/vendor/kelee/resources/kelee.one/Resource/JavaScript/iWallBiZhi/landing_initialize.js, requires-body=1
+移除头像页横幅跳转 = type=http-response, pattern=^https://api\.fzxhmy\.com/avatar/landing\?, script-path=https://raw.githubusercontent.com/CodeApe-Xiaoyin/loon-plugins/kelee-snapshot-2026-11-10/vendor/kelee/resources/kelee.one/Resource/JavaScript/iWallBiZhi/landing.js, requires-body=1
+
+[MITM]
+hostname = %APPEND% api.fzxhmy.com

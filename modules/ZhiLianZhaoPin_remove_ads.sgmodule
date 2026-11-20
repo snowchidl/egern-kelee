@@ -1,0 +1,16 @@
+#!name=智联招聘去广告（Egern转换版）
+#!desc=移除开屏广告、弹窗、职位页面推广和各类横幅推广。此插件需要IPA签名方可使用，App Store用户请勿使用此插件，务必点击下方主页链接查看详细教程。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+URL-REGEX, "^https:\/\/(ask|cgate)\.zhaopin\.com\/operation\/ad\/", REJECT
+
+[URL Rewrite]
+^https://cgate\.zhaopin\.com/resumeapi/resumeCheck/positionDetailBottomTipCheck$ reject-dict
+^https://cgate\.zhaopin\.com/bdp/commercial/queryLinkData$ reject
+
+[Script]
+ZhiLianZhaoPin_remove_ads-op0 = type=http-response, pattern=^https://ask\.zhaopin\.com/plat-zqa-server/home/\d\.\d\.\d/getHomeContents\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ZhiLianZhaoPin_remove_ads.js, requires-body=1, argument=0
+
+[MITM]
+hostname = %APPEND% ask.zhaopin.com, cgate.zhaopin.com

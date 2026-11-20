@@ -1,0 +1,14 @@
+#!name=Roborock去广告（Egern转换版）
+#!desc=移除横幅、活动推广、机器人图标，精简服务中心。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://cniot\.roborock\.com/api/v1/activity/banner/list$ reject-dict
+^https://cniot\.roborock\.com/api/v1/activity/latest$ reject-dict
+^https://cniot\.roborock\.com/api/v1/app/theme/device/icon\? reject
+
+[Script]
+Roborock_remove_ads-op0 = type=http-response, pattern=^https://api\.roborock\.com/v2/h5\.page\.item\.info\?id=4115$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Roborock_remove_ads.js, requires-body=1, argument=0
+
+[MITM]
+hostname = %APPEND% cniot.roborock.com, api.roborock.com

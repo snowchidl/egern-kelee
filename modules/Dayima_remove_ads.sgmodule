@@ -1,0 +1,15 @@
+#!name=大姨妈月经期助手去广告（Egern转换版）
+#!desc=移除信息流广告，精简首页金刚位及我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://forumapi\.yoloho\.com/topic/relate/recommend/flow/getList\? reject-dict
+^https://shop18476221\.m\.youzan\.com/wscshop/showcase/feature\? reject
+
+[Script]
+Dayima_remove_ads-op0 = type=http-response, pattern=^https://forumapi\.yoloho\.com/index/recommend/listV\d\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Dayima_remove_ads.js, requires-body=1, argument=0
+Dayima_remove_ads-op1 = type=http-response, pattern=^https://dataapi\.yoloho\.com/tool/bubble/event/new/iconList\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Dayima_remove_ads.js, requires-body=1, argument=1
+Dayima_remove_ads-op2 = type=http-response, pattern=^https://dataapi\.yoloho\.com/tool/card/mine/app\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Dayima_remove_ads.js, requires-body=1, argument=2
+
+[MITM]
+hostname = %APPEND% forumapi.yoloho.com, dataapi.yoloho.com, shop18476221.m.youzan.com

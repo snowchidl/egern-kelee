@@ -1,0 +1,12 @@
+#!name=Sofascore去广告（Egern转换版）
+#!desc=移除横幅及信息流广告｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://api\.sofascore\.com/api/v\d/dsp/country/[A-Z]{2}$ reject-dict
+
+[Script]
+Sofascore_remove_ads-op0 = type=http-response, pattern=^https://api\.sofascore\.com/api/v\d/trending/grid/tiles/[A-Z]{2}$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Sofascore_remove_ads.js, argument=0
+
+[MITM]
+hostname = %APPEND% api.sofascore.com

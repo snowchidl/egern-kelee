@@ -1,0 +1,27 @@
+#!name=起点读书去广告（Egern转换版）
+#!desc=移除起点读书开屏广告、每日导读、各类弹窗、文末广告、搜索填充词，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://magev6\.if\.qidian\.com/argus/api/v4/client/getsplashscreen\? reject-dict
+^https://magev6\.if\.qidian\.com/argus/api/v1/adv/ reject-dict
+^https://ywab\.reader\.qq\.com/user/experiments/v2\? reject-dict
+^https://magev6\.if\.qidian\.com/argus/api/v1/checkin/simpleinfo\? reject-dict
+^https://magev6\.if\.qidian\.com/argus/api/v1/push/getdialog\? reject-dict
+^https://magev6\.if\.qidian\.com/argus/api/v1/message/getpushedmessagelist$ reject-dict
+^https://magev6\.if\.qidian\.com/argus/api/v1/maintain/playstrip$ reject-dict
+^https://magev6\.if\.qidian\.com/argus/api/v1/dailyrecommend/recommendBook\? reject-dict
+^https://magev6\.if\.qidian\.com/argus/api/v1/freshman/bookshelfbtn$ reject-dict
+^https://magev6\.if\.qidian\.com/argus/api/v1/bookshelf/getTopOperation$ reject-dict
+^https://magev6\.if\.qidian\.com/argus/api/v1/booksearch/hotWords\? reject-dict
+^https://magev6\.if\.qidian\.com/argus/api/v1/followsubscribe/showChapterEndModule\? reject-dict
+^https://magev6\.if\.qidian\.com/argus/api/v1/young/getconf$ reject-dict
+
+[Script]
+QiDian_remove_ads-op0 = type=http-response, pattern=^https://magev6\.if\.qidian\.com/argus/api/v1/client/getconf$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/QiDian_remove_ads.js, requires-body=1, argument=0
+QiDian_remove_ads-op1 = type=http-response, pattern=^https://magev6\.if\.qidian\.com/argus/api/v1/client/getconf$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/QiDian_remove_ads.js, requires-body=1, argument=1
+QiDian_remove_ads-op2 = type=http-response, pattern=^https://magev6\.if\.qidian\.com/argus/api/v2/dailyrecommend/getdailyrecommend\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/QiDian_remove_ads.js, requires-body=1, argument=2
+QiDian_remove_ads-op3 = type=http-response, pattern=^https://magev6\.if\.qidian\.com/argus/api/v3/user/getaccountpage\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/QiDian_remove_ads.js, requires-body=1, argument=3
+
+[MITM]
+hostname = %APPEND% magev6.if.qidian.com, ywab.reader.qq.com

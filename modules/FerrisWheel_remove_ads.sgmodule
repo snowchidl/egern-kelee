@@ -1,0 +1,13 @@
+#!name=摩天轮去广告（Egern转换版）
+#!desc=移除开屏广告、弹窗，精简底栏。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://appapi\.motianlun\.cn/showapi/pub/site/\d+/app/loading\? reject-dict
+^https://appapi\.motianlun\.cn/showapi/pub/site/\d+/banner/app\? reject-dict
+^https://appapi\.motianlun\.cn/userdataapi/pub/v\d/top/keywords\? reject-dict
+^https://appapi\.motianlun\.cn/buyerapi/buyer/v\d/search/index\? reject-dict
+^https://appapi\.motianlun\.cn/showapi/site/\d+/transfer/recentShows\? reject-dict
+
+[MITM]
+hostname = %APPEND% appapi.motianlun.cn

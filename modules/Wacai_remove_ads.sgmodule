@@ -1,0 +1,14 @@
+#!name=挖财记账去广告（Egern转换版）
+#!desc=移除开屏广告、横幅广告，顶部推广、活动配置。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://jz\.wacaijizhang\.com/api/banners/ reject-dict
+^https://jz\.wacaijizhang\.com/api/resource/universal/fetch$ reject-dict
+^https://jz\.wacaijizhang\.com/activity/ reject
+
+[Script]
+Wacai_remove_ads-op0 = type=http-response, pattern=^https://jz\.wacaijizhang\.com/sensor/config/iOS\.conf\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Wacai_remove_ads.js, argument=0
+
+[MITM]
+hostname = %APPEND% jz.wacaijizhang.com

@@ -1,0 +1,15 @@
+#!name=ReelShort去广告（Egern转换版）
+#!desc=移除开屏广告、为你推荐及各类弹窗，移除搜索栏填充词。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://(v-api\.crazymaplestudios\.com|d1k8g7qaebqd28\.cloudfront\.net)/api/video/app/getSplashScreenConfig$ reject-dict
+^https://(v-api\.crazymaplestudios\.com|d1k8g7qaebqd28\.cloudfront\.net)/api/video/hall/landingPage$ reject-dict
+^https://(v-api\.crazymaplestudios\.com|d1k8g7qaebqd28\.cloudfront\.net)/api/video/book/getPayModeV2$ reject-dict
+
+[Script]
+ReelShort_remove_ads-op0 = type=http-response, pattern=^https://(v-api\.crazymaplestudios\.com|d1k8g7qaebqd28\.cloudfront\.net)/api/video/book/getBookDetailV2$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ReelShort_remove_ads.js, requires-body=1, argument=0
+ReelShort_remove_ads-op1 = type=http-response, pattern=^https://(v-api\.crazymaplestudios\.com|d1k8g7qaebqd28\.cloudfront\.net)/api/video/hall/infoV3$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ReelShort_remove_ads.js, requires-body=1, argument=1
+
+[MITM]
+hostname = %APPEND% v-api.crazymaplestudios.com, d1k8g7qaebqd28.cloudfront.net

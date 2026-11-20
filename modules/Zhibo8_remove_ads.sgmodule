@@ -1,0 +1,24 @@
+#!name=直播吧去广告（Egern转换版）
+#!desc=移除信息流广告、横幅广告、弹窗广告、皮肤配置、悬浮挂件、热门搜索，移除青少年模式，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://rn\.qiumibao\.com/news/relation\.php$ reject-dict
+^https://guess\.qiumibao\.com/api/c/notice$ reject-dict
+^https://guess\.qiumibao\.com/api/c/pop$ reject-dict
+^https://guess\.qiumibao\.com/api/ep/pop$ reject-dict
+^https://guess\.qiumibao\.com/api/c/banner$ reject-dict
+^https://search\.qiumibao\.com/hot/word_list$ reject-dict
+
+[Script]
+Zhibo8_remove_ads-op0 = type=http-response, pattern=^https://headline\.qiumibao\.com/recommend/list\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhibo8_remove_ads.js, requires-body=1, argument=0
+Zhibo8_remove_ads-op1 = type=http-response, pattern=^https://a\.qiumibao\.com/found/\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhibo8_remove_ads.js, requires-body=1, argument=1
+Zhibo8_remove_ads-op2 = type=http-response, pattern=^https://a\.qiumibao\.com/ios/config/\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhibo8_remove_ads.js, requires-body=1, argument=2
+Zhibo8_remove_ads-op3 = type=http-response, pattern=^https://a\.qiumibao\.com/ios/config/\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhibo8_remove_ads.js, requires-body=1, argument=3
+Zhibo8_remove_ads-op4 = type=http-response, pattern=^https://guess\.qiumibao\.com/api/n/rcd$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhibo8_remove_ads.js, requires-body=1, argument=4
+Zhibo8_remove_ads-op5 = type=http-response, pattern=^https://pre-match\.qiumibao\.com/pre_match_data/v\d/\d+-\d+-\d+/\d+_fund\.htm\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhibo8_remove_ads.js, requires-body=1, argument=5
+Zhibo8_remove_ads-op6 = type=http-response, pattern=^https://guess\.qiumibao\.com/api/c/menu$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhibo8_remove_ads.js, requires-body=1, argument=6
+Zhibo8_remove_ads-op7 = type=http-response, pattern=^https://s\.qiumibao\.com/m/ios/json/zhibo/zuqiu/\d+/match\d+vl\.htm\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhibo8_remove_ads.js, requires-body=1, argument=7
+
+[MITM]
+hostname = %APPEND% headline.qiumibao.com, a.qiumibao.com, rn.qiumibao.com, guess.qiumibao.com, s.qiumibao.com, pre-match.qiumibao.com, search.qiumibao.com

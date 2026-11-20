@@ -1,0 +1,14 @@
+#!name=行者户外去广告（Egern转换版）
+#!desc=移除弹窗广告、发现页面横幅推广的推广金刚位，移除我的页面横幅推广。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://www\.imxingzhe\.com/api/v1/pop/window/\? reject-dict
+
+[Script]
+OnTheWay_remove_ads-op0 = type=http-response, pattern=^https://www\.imxingzhe\.com/api/v4/account/get_user_info\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/OnTheWay_remove_ads.js, requires-body=1, argument=0
+OnTheWay_remove_ads-op1 = type=http-response, pattern=^https://www\.imxingzhe\.com/api/v4/discovery/ios/\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/OnTheWay_remove_ads.js, requires-body=1, argument=1
+OnTheWay_remove_ads-op2 = type=http-response, pattern=^https://www\.imxingzhe\.com/api/v4/discovery/ios/\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/OnTheWay_remove_ads.js, requires-body=1, argument=2
+
+[MITM]
+hostname = %APPEND% www.imxingzhe.com

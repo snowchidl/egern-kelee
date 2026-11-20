@@ -1,0 +1,10 @@
+#!name=腾讯文档去广告（Egern转换版）
+#!desc=移除开屏广告、首页横幅推广。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://tianshu\.qq\.com/open/ts_access/GetAds\? reject-dict
+^https://h5\.qzone\.qq\.com/p/adboss/api/json/ts_access/GetAds$ reject-dict
+
+[MITM]
+hostname = %APPEND% tianshu.qq.com, h5.qzone.qq.com

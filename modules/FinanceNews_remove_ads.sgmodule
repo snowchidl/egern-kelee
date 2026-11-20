@@ -1,0 +1,21 @@
+#!name=华尔街见闻去广告（Egern转换版）
+#!desc=移除开屏广告、文末广告、信息流广告，精简底栏。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://api-one-wscn\.awtmt\.com/apiv1/advertising/ reject-dict
+^https://api-one-wscn\.awtmt\.com/apiv1/kvconfig/items/search_keywords_wscnvip$ reject-dict
+^https://api-one-wscn\.awtmt\.com/apiv1/search/hotsearch\? reject-dict
+^https://api-one-wscn\.awtmt\.com/apiv1/content/articles/hot\? reject-dict
+^https://wallstreetcn\.com/app-faas/coupon/user/search/popup$ reject-dict
+^https://api-one-wscn\.awtmt\.com/apiv1/content/lives/relateddata/ reject-dict
+^https://api-one-wscn\.awtmt\.com/apiv1/content/articles/relateddata/ reject-dict
+^https://api-one-wscn\.awtmt\.com/apiv1/content/carousel/information-flow\? reject-dict
+
+[Script]
+FinanceNews_remove_ads-op0 = type=http-response, pattern=^https://api-one-wscn\.awtmt\.com/apiv1/kvconfig/items/tabbarconfig1$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FinanceNews_remove_ads.js, requires-body=1, argument=0
+FinanceNews_remove_ads-op1 = type=http-response, pattern=^https://api-one-wscn\.awtmt\.com/apiv1/content/articles/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FinanceNews_remove_ads.js, requires-body=1, argument=1
+FinanceNews_remove_ads-op2 = type=http-response, pattern=^https://api-one-wscn\.awtmt\.com//apiv1/kvconfig/items/membersrights$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FinanceNews_remove_ads.js, requires-body=1, argument=2
+
+[MITM]
+hostname = %APPEND% api-one-wscn.awtmt.com

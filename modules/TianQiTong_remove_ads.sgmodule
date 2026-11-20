@@ -1,0 +1,16 @@
+#!name=天气通去广告（Egern转换版）
+#!desc=移除开屏广告、横幅广告、弹窗广告，精简底栏及我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://forecast\.sina\.cn/app/overall/switch\.php\? reject-dict
+^https://tqt\.weibo\.cn/business/advert/ reject-dict
+^https://tqt\.weibo\.cn/user/device/ad_multi_star\? reject-dict
+^https://tqt\.weibo\.cn/operation/activity/ reject-dict
+^https://tqt\.weibo\.cn/api/user/user/\d\.\d/\?method=personal_center$ reject-dict
+
+[Script]
+TianQiTong_remove_ads-op0 = type=http-response, pattern=^https://tqt\.weibo\.cn/master/nav/tab\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/TianQiTong_remove_ads.js, requires-body=1, argument=0
+
+[MITM]
+hostname = %APPEND% forecast.sina.cn, tqt.weibo.cn

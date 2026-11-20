@@ -1,0 +1,35 @@
+#!name=什么值得买去广告（Egern转换版）
+#!desc=移除开屏广告、信息流广告、各类横幅广告、搜索页广告、文章内广告，移除活动皮肤、精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+DOMAIN, adx-api.zdmimg.com, REJECT
+
+[URL Rewrite]
+^https://app-api\.smzdm\.com/util/loading\? reject-dict
+^https://app-api\.smzdm\.com/mychannel/list$ reject-dict
+^https://h5\.smzdm\.com/user/coupon/coupon_list\? reject
+^https://user-api\.smzdm\.com/vip/bottom_card_list\? reject-dict
+^https://article-api\.smzdm\.com/publish/get_bubble\? reject-dict
+^https://s-api\.smzdm\.com/sou/search_default_keyword\? reject-dict
+^https://s-api\.smzdm\.com/sou/popup_coupon\? reject-dict
+
+[Script]
+smzdm_remove_ads-op0 = type=http-response, pattern=^https://app-api\.smzdm\.com/util/update$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/smzdm_remove_ads.js, requires-body=1, argument=0
+smzdm_remove_ads-op1 = type=http-response, pattern=^https://app-api\.smzdm\.com/util/update$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/smzdm_remove_ads.js, requires-body=1, argument=1
+smzdm_remove_ads-op2 = type=http-response, pattern=^https://app-api\.smzdm\.com/util/update$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/smzdm_remove_ads.js, requires-body=1, argument=2
+smzdm_remove_ads-op3 = type=http-response, pattern=^https://homepage-api\.smzdm\.com/v3/home\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/smzdm_remove_ads.js, requires-body=1, argument=3
+smzdm_remove_ads-op4 = type=http-response, pattern=^https://haojia-api\.smzdm\.com/home/list\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/smzdm_remove_ads.js, requires-body=1, argument=4
+smzdm_remove_ads-op5 = type=http-response, pattern=^https://haojia-api\.smzdm\.com/home/list\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/smzdm_remove_ads.js, requires-body=1, argument=5
+smzdm_remove_ads-op6 = type=http-response, pattern=^https://haojia\.m\.smzdm\.com/detail_modul/user_related_modul\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/smzdm_remove_ads.js, requires-body=1, argument=6
+smzdm_remove_ads-op7 = type=http-response, pattern=^https://haojia\.m\.smzdm\.com/detail_modul/other_modul\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/smzdm_remove_ads.js, requires-body=1, argument=7
+smzdm_remove_ads-op8 = type=http-response, pattern=^https://user-api\.smzdm\.com/vip$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/smzdm_remove_ads.js, requires-body=1, argument=8
+smzdm_remove_ads-op9 = type=http-response, pattern=^https://s-api\.smzdm\.com/sou/list_v10\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/smzdm_remove_ads.js, requires-body=1, argument=9
+smzdm_remove_ads-op10 = type=http-response, pattern=^https://s-api\.smzdm\.com/sou/filter/tags/hot_tags\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/smzdm_remove_ads.js, requires-body=1, argument=10
+smzdm_remove_ads-op11 = type=http-response, pattern=^https://s-api\.smzdm\.com/sou/filter/tags/hot_tags\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/smzdm_remove_ads.js, requires-body=1, argument=11
+smzdm_remove_ads-op12 = type=http-response, pattern=^https://haojia-api\.smzdm\.com/detail/\d+\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/smzdm_remove_ads.js, requires-body=1, argument=12
+smzdm_remove_ads-op13 = type=http-response, pattern=^https://haojia-cdn\.smzdm\.com/preload/\d+/fiphone/v\d+_\d+_\d+/wx\d+/im\d+/[0-9a-z]+/[0-9a-z]+\.json$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/smzdm_remove_ads.js, requires-body=1, argument=13
+smzdm_remove_ads-op14 = type=http-response, pattern=^https://post\.m\.smzdm\.com/ajax_app/ajax_get_footer_list\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/smzdm_remove_ads.js, requires-body=1, argument=14
+
+[MITM]
+hostname = %APPEND% app-api.smzdm.com, homepage-api.smzdm.com, h5.smzdm.com, haojia-api.smzdm.com, haojia.m.smzdm.com, user-api.smzdm.com, article-api.smzdm.com, s-api.smzdm.com, haojia-cdn.smzdm.com, post.m.smzdm.com

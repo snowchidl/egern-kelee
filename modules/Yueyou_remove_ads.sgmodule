@@ -1,0 +1,13 @@
+#!name=阅友去广告（Egern转换版）
+#!desc=移除开屏广告、弹窗广告和阅读页面广告，移除底栏福利按钮。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+DOMAIN, ads.reader.yueyouxs.com, REJECT
+
+[Script]
+Yueyou_remove_ads-op0 = type=http-response, pattern=^https://goway\.reader\.yueyouxs\.com/assemble/app/basic/getAppInfo\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Yueyou_remove_ads.js, requires-body=1, argument=0
+Yueyou_remove_ads-op1 = type=http-response, pattern=^https://goway\.reader\.yueyouxs\.com/assemble/app/basic/getAppInfo\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Yueyou_remove_ads.js, requires-body=1, argument=1
+
+[MITM]
+hostname = %APPEND% goway.reader.yueyouxs.com

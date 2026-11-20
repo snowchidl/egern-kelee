@@ -1,0 +1,17 @@
+#!name=e充电去广告（Egern转换版）
+#!desc=移除开屏广告、活动及发现页面，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+DOMAIN, adash-evone.echargenet.com, REJECT
+
+[URL Rewrite]
+^https://aserver-evone\.echargenet\.com/orange/datacenter/snapshot-meta\? reject-dict
+^https://api-evone\.echargenet\.com/gw/evone\.echargeapi\.open\.ad\.getadmaterials/ reject-dict
+^https://api-evone\.echargenet\.com/gw/evone\.appsns\.open\.efriend\.topic\.listrecommenttopic/ reject-dict
+^https://api-evone\.echargenet\.com/gw/evone\.appsns\.open\.efriend\.post\.listapppost/ reject-dict
+^https://api-evone\.echargenet\.com/gw/evone\.appsns\.open\.merchant\.merchant\.list/ reject-dict
+^https://api-evone\.echargenet\.com/gw/evone\.appsns\.open\.merchant\.news\.pagelistapp/ reject-dict
+
+[MITM]
+hostname = %APPEND% aserver-evone.echargenet.com, api-evone.echargenet.com

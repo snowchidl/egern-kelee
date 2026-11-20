@@ -1,0 +1,30 @@
+#!name=波点音乐去广告（Egern转换版）
+#!desc=精简应用配置，禁用P2P传输。移除开屏广告、横幅推广、悬浮广告、歌曲广告、商城入口、搜索推广、评论区推广、试听语音提醒。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://bd-api\.kuwo\.cn/api/(play|service|advert)/advert/ reject-dict
+^https://bd-api\.kuwo\.cn/api/service/banner/ reject-dict
+^https://bd-api\.kuwo\.cn/api/ucenter/vip/give/config\? reject-dict
+^https://bd-api\.kuwo\.cn/api/service/home/module\?.*&moduleId=6 reject-dict
+^https://bd-api\.kuwo\.cn/api/pay/vip/lowPriceText\? reject-dict
+^https://bd-api\.kuwo\.cn/api/service/global/config/vipEnter\? reject-dict
+^https://bd-api\.kuwo\.cn/api/popup/ reject-dict
+^https://bd-api\.kuwo\.cn/api/pay/vip/invitation/swell/popup\? reject-dict
+^https://bd-api\.kuwo\.cn/api/service/version/popup\? reject-dict
+^https://bd-api\.kuwo\.cn/api/pay/vip/invitation/assist/popup\? reject-dict
+^https://bd-api\.kuwo\.cn/api/pay/h5/common/popup\? reject-dict
+
+[Script]
+BodianMusic_remove_ads-op0 = type=http-response, pattern=^https://bd-api\.kuwo\.cn/api/service/conf/all\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/BodianMusic_remove_ads.js, requires-body=1, argument=0
+BodianMusic_remove_ads-op1 = type=http-response, pattern=^https://bd-api\.kuwo\.cn/api/service/conf/all\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/BodianMusic_remove_ads.js, requires-body=1, argument=1
+BodianMusic_remove_ads-op2 = type=http-response, pattern=^https://ab-bodian\.kuwo\.cn/abtest/ui/info\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/BodianMusic_remove_ads.js, requires-body=1, argument=2
+BodianMusic_remove_ads-op3 = type=http-response, pattern=^https://bd-api\.kuwo\.cn/api/service/global/config/scene\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/BodianMusic_remove_ads.js, requires-body=1, argument=3
+BodianMusic_remove_ads-op4 = type=http-response, pattern=^https://bd-api\.kuwo\.cn/api/service/global/config/scene\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/BodianMusic_remove_ads.js, requires-body=1, argument=4
+BodianMusic_remove_ads-op5 = type=http-response, pattern=^https://bd-api\.kuwo\.cn/api/search/topic/word/list\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/BodianMusic_remove_ads.js, requires-body=1, argument=5
+BodianMusic_remove_ads-op6 = type=http-response, pattern=^https://bd-api\.kuwo\.cn/api/service/home/index\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/BodianMusic_remove_ads.js, requires-body=1, argument=6
+BodianMusic_remove_ads-op7 = type=http-response, pattern=^https://bd-api\.kuwo\.cn/api/service/music/recommendList\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/BodianMusic_remove_ads.js, requires-body=1, argument=7
+BodianMusic_remove_ads-op8 = type=http-response, pattern=^https://bd-api\.kuwo\.cn/api/comments/v3/topInfo\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/BodianMusic_remove_ads.js, requires-body=1, argument=8
+
+[MITM]
+hostname = %APPEND% bd-api.kuwo.cn

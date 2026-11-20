@@ -1,0 +1,23 @@
+#!name=猫耳FM去广告（Egern转换版）
+#!desc=移除开屏广告、青少年模式弹窗、首页顶部入口，替换底栏的直播入口为发现入口。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://data\.missevan\.com/site/ad-track$ reject-dict
+^https://app\.missevan\.com/x/recommend/get-popup$ reject-dict
+^https://fm\.missevan\.com/api/v2/meta/banner$ reject-dict
+^https://fm\.missevan\.com/api/v2/recommended/top\? reject-dict
+^https://fm\.missevan\.com/api/v2/chatroom/sound/recommend\? reject-dict
+
+[Script]
+CatEarFM_remove_ads-op0 = type=http-response, pattern=^https://app\.missevan\.com/site/launch\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/CatEarFM_remove_ads.js, requires-body=1, argument=0
+CatEarFM_remove_ads-op1 = type=http-response, pattern=^https://app\.missevan\.com/site/config$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/CatEarFM_remove_ads.js, requires-body=1, argument=1
+CatEarFM_remove_ads-op2 = type=http-response, pattern=^https://app\.missevan\.com/site/config$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/CatEarFM_remove_ads.js, requires-body=1, argument=2
+CatEarFM_remove_ads-op3 = type=http-response, pattern=^https://app\.missevan\.com/site/config$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/CatEarFM_remove_ads.js, requires-body=1, argument=3
+CatEarFM_remove_ads-op4 = type=http-response, pattern=^https://app\.missevan\.com/site/tabs\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/CatEarFM_remove_ads.js, requires-body=1, argument=4
+CatEarFM_remove_ads-op5 = type=http-response, pattern=^https://app\.missevan\.com/site/icons\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/CatEarFM_remove_ads.js, requires-body=1, argument=5
+CatEarFM_remove_ads-op6 = type=http-response, pattern=^https://app\.missevan\.com/discovery/list$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/CatEarFM_remove_ads.js, requires-body=1, argument=6
+CatEarFM_remove_ads-op7 = type=http-response, pattern=^https://app\.missevan\.com/site/get-top$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/CatEarFM_remove_ads.js, requires-body=1, argument=7
+
+[MITM]
+hostname = %APPEND% app.missevan.com, data.missevan.com, fm.missevan.com

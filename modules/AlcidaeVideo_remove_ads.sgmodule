@@ -1,0 +1,13 @@
+#!name=海雀去广告（Egern转换版）
+#!desc=移除开屏广告、横幅广告、弹窗广告，拦截商城和资讯页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://app-api-32\.ihaique\.net/api/app/v\d/appad/cmd/AppadGetSplashAds\? reject-dict
+^https://app-api-32\.ihaique\.net/api/app/v\d/appad/cmd/AppGetAttentionInfos\? reject-dict
+^https://app-api-32\.ihaique\.net/api/app/v\d/appad/cmd/AppadGetBannerAds\? reject-dict
+^https://g\.ihaique\.net/alcidae/info/index\.html$ reject
+^https://shop151522958\.youzan\.com/v\d/showcase/homepage\? reject
+
+[MITM]
+hostname = %APPEND% app-api-32.ihaique.net, g.ihaique.net, shop151522958.youzan.com

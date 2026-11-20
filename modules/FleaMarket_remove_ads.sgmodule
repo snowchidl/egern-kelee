@@ -1,0 +1,34 @@
+#!name=闲鱼去广告（Egern转换版）
+#!desc=移除开屏广告、商品信息流广告、关注推荐、搜索栏填充词、首页签到入口及悬浮广告，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://acs\.m\.goofish\.com/gw/mtop\.taobao\.idlecommerce\.splash\.ads/ reject-dict
+^https://acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.user\.strategy\.list/ reject-dict
+^https://acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.item\.recommend\.list/ reject-dict
+^https://acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.local\.near\.by\.corner\.info/ reject-dict
+^https://acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.item\.buy\.feeds/ reject-dict
+^https://acs\.m\.goofish\.com/gw/mtop\.taobao\.idlemtopsearch\.search\.shade/ reject-dict
+^https://acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.playboy\.recommend/ reject-dict
+
+[Script]
+FleaMarket_remove_ads-op0 = type=http-response, pattern=^https://acs\.m\.goofish\.com/gw/mtop\.taobao\.idlehome\.home\.nextfresh/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FleaMarket_remove_ads.js, requires-body=1, argument=0
+FleaMarket_remove_ads-op1 = type=http-response, pattern=^https://acs\.m\.goofish\.com/gw/mtop\.taobao\.idlehome\.widget\.refresh\.get/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FleaMarket_remove_ads.js, requires-body=1, argument=1
+FleaMarket_remove_ads-op2 = type=http-response, pattern=^https://acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.home\.whale\.modulet/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FleaMarket_remove_ads.js, requires-body=1, argument=2
+FleaMarket_remove_ads-op3 = type=http-response, pattern=^https://acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.fun\.follow\.feed\.list/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FleaMarket_remove_ads.js, requires-body=1, argument=3
+FleaMarket_remove_ads-op4 = type=http-response, pattern=^https://acs\.m\.goofish\.com/gw/mtop\.taobao\.idlehome\.home\.community/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FleaMarket_remove_ads.js, requires-body=1, argument=4
+FleaMarket_remove_ads-op5 = type=http-response, pattern=^https://acs\.m\.goofish\.com/gw/mtop\.taobao\.idlehome\.home\.newitem\.page/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FleaMarket_remove_ads.js, requires-body=1, argument=5
+FleaMarket_remove_ads-op6 = type=http-response, pattern=^https://acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.local\.flow\.plat\.section/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FleaMarket_remove_ads.js, requires-body=1, argument=6
+FleaMarket_remove_ads-op7 = type=http-response, pattern=^https://acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.local\.home\.top/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FleaMarket_remove_ads.js, requires-body=1, argument=7
+FleaMarket_remove_ads-op8 = type=http-response, pattern=^https://acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.local\.home/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FleaMarket_remove_ads.js, requires-body=1, argument=8
+FleaMarket_remove_ads-op9 = type=http-response, pattern=^https://acs\.m\.goofish\.com/gw/mtop\.idle\.user\.page\.my\.adapter/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FleaMarket_remove_ads.js, requires-body=1, argument=9
+FleaMarket_remove_ads-op10 = type=http-response, pattern=^https://acs\.m\.goofish\.com/gw/mtop\.taobao\.idlehome\.home\.circle\.list/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FleaMarket_remove_ads.js, requires-body=1, argument=10
+FleaMarket_remove_ads-op11 = type=http-response, pattern=^https://acs\.m\.goofish\.com/gw/mtop\.taobao\.idlehome\.magic\.home\.page\.list/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FleaMarket_remove_ads.js, requires-body=1, argument=11
+FleaMarket_remove_ads-op12 = type=http-response, pattern=^https://g-acs\.m\.goofish\.com/gw/mtop\.taobao\.idlemtopsearch\.search/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FleaMarket_remove_ads.js, requires-body=1, argument=12
+FleaMarket_remove_ads-op13 = type=http-response, pattern=^https://g-acs\.m\.goofish\.com/gw/mtop\.taobao\.idlemtopsearch\.search/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FleaMarket_remove_ads.js, requires-body=1, argument=13
+FleaMarket_remove_ads-op14 = type=http-response, pattern=^https://acs\.m\.goofish\.com/gw/mtop\.taobao\.idlemtopsearch\.search\.discover/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FleaMarket_remove_ads.js, requires-body=1, argument=14
+FleaMarket_remove_ads-op15 = type=http-response, pattern=^https://acs\.m\.goofish\.com/gw/mtop\.taobao\.idlemtopsearch\.item\.search\.activate/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FleaMarket_remove_ads.js, requires-body=1, argument=15
+FleaMarket_remove_ads-op16 = type=http-response, pattern=^https://acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.trade\.full\.info/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FleaMarket_remove_ads.js, requires-body=1, argument=16
+
+[MITM]
+hostname = %APPEND% acs.m.goofish.com, g-acs.m.goofish.com

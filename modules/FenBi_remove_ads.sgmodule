@@ -1,0 +1,23 @@
+#!name=粉笔去广告（Egern转换版）
+#!desc=移除开屏广告、弹窗广告、悬浮广告、热门搜索，移除底栏皮肤，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://keapi\.fenbi\.com/app/(iphone|ipad)/position_resource/get_banners\? reject-dict
+^https://market-api\.fenbi\.com/(iphone|ipad)/v1/assistant/info\? reject-dict
+^https://keapi\.fenbi\.com/app/(iphone|ipad)/position_resource/get_home_banners\?.*position_resource_type=2 reject-dict
+^https://keapi\.fenbi\.com/app/iphone/\w+/reddot\? reject-dict
+^https://ke\.fenbi\.com/(iphone|ipad)/v3/timetable/today_with_public_episodes\? reject-dict
+^https://hera-webapp\.fenbi\.com/(iphone|ipad)/topic/hotquery/list\? reject-dict
+^https://hera-webapp\.fenbi\.com/(iphone|ipad)/explore/consts\? reject-dict
+^https://hera-webapp\.fenbi\.com/(iphone|ipad)/announcement/hotquery/list\? reject-dict
+^https://ke\.fenbi\.com/(iphone|ipad)/v3/user_member/entry\? reject-dict
+^https://market-api\.fenbi\.com/(iphone|ipad)/v1/assistant/my\? reject-dict
+
+[Script]
+FenBi_remove_ads-op0 = type=http-response, pattern=^https://keapi\.fenbi\.com/app/(iphone|ipad)/position_resource/get_home_banners\?.*position_resource_type=1, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FenBi_remove_ads.js, argument=0
+FenBi_remove_ads-op1 = type=http-response, pattern=^https://hera-webapp\.fenbi\.com/(iphone|ipad)/recommend/info\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FenBi_remove_ads.js, requires-body=1, argument=1
+FenBi_remove_ads-op2 = type=http-response, pattern=^https://ke\.fenbi\.com/(iphone|ipad)/v3/apps/config\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/FenBi_remove_ads.js, requires-body=1, argument=2
+
+[MITM]
+hostname = %APPEND% keapi.fenbi.com, market-api.fenbi.com, ke.fenbi.com, hera-webapp.fenbi.com

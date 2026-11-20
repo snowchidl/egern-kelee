@@ -1,0 +1,16 @@
+#!name=堆糖去广告（Egern转换版）
+#!desc=移除开屏广告、信息流广告、热搜排行榜广告、我的页面横幅广告，移除关注推荐，精简底部导航栏。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://xapi\.duitang\.com/napi/ads/\? reject-dict
+^https://api-2\.duitang\.com/napi/vienna/daren/daren/recommend/ reject-dict
+^https://www\.duitang\.com/napi/hot/search/list/ reject-dict
+
+[Script]
+DuiTang_remove_ads-op0 = type=http-response, pattern=^https://meta\.duitang\.com/napi/infra/settings/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DuiTang_remove_ads.js, requires-body=1, argument=0
+DuiTang_remove_ads-op1 = type=http-response, pattern=^https://(www|api-2)\.duitang\.com/napi/home/bottom_tab/detail/\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DuiTang_remove_ads.js, requires-body=1, argument=1
+DuiTang_remove_ads-op2 = type=http-response, pattern=^https://api-2\.duitang\.com/napi/settings/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DuiTang_remove_ads.js, requires-body=1, argument=2
+
+[MITM]
+hostname = %APPEND% www.duitang.com, api-2.duitang.com, meta.duitang.com

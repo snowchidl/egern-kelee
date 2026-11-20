@@ -1,0 +1,20 @@
+#!name=酷狗概念版去广告（Egern转换版）
+#!desc=移除广告服务模块、播放器广告，精简乐库及搜索页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://gateway\.kugou\.com/ads\.service/ reject-dict
+^https://gateway\.kugou\.com/youth/v1/start_img/last\? reject-dict
+^https://gateway\.kugou\.com/ads\.gateway/ reject-dict
+^http://mobilelog\.kugou\.com/adtrackconfig\.json$ reject-dict
+^https://gateway\.kugou\.com/youth/v1/experiment/get_params\? reject-dict
+^https://gateway\.kugou\.com/youth/api/user/v1/init\? reject-dict
+^https://gateway\.kugou\.com/youth/v2/activity/task_list\? reject-dict
+^https://gateway\.kugou\.com/youth/v1/channel/tab_list\? reject-dict
+^https://gateway\.kugou\.com/goddess/v1/content/biz_list\? reject-dict
+
+[Script]
+KuGouYouth_remove_ads-op0 = type=http-response, pattern=^https://gateway\.kugou\.com/youth/v1/yueku/tab\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/KuGouYouth_remove_ads.js, requires-body=1, argument=0
+
+[MITM]
+hostname = %APPEND% gateway.kugou.com

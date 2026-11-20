@@ -1,0 +1,22 @@
+#!name=百度文库去广告（Egern转换版）
+#!desc=移除开屏广告、横幅广告、弹窗广告、信息流推广、搜索发现、热门搜索、资料库搜索推荐，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://appwk\.baidu\.com/xpage/interface/wknaad\? reject-dict
+^https://appwk\.baidu\.com/appapi/search/hot\? reject-dict
+^https://appwk\.baidu\.com/naapi/search/wkhotwords\? reject-dict
+^https://appwk\.baidu\.com/appapi/task/viptasklist\? reject-dict
+^https://appwk\.baidu\.com/activity/interface/wkapppopup\? reject-dict
+^https://appwk\.baidu\.com/appapi/abg/index\? reject-dict
+^https://appwk\.baidu\.com/naapi/recommend/recommenddoc\? reject-dict
+^https://appwk\.baidu\.com/naapi/recommend/vipdoccard\? reject-dict
+
+[Script]
+BaiduWenku_remove_ads-op0 = type=http-response, pattern=^https://appwk\.baidu\.com/appapi/index/home\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/BaiduWenku_remove_ads.js, requires-body=1, argument=0
+BaiduWenku_remove_ads-op1 = type=http-response, pattern=^https://(appwk|tanbi)\.baidu\.com/gsula/sula/syncmrecall$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/BaiduWenku_remove_ads.js, requires-body=1, argument=1
+BaiduWenku_remove_ads-op2 = type=http-response, pattern=^https://appwk\.baidu\.com/appapi/index/tab\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/BaiduWenku_remove_ads.js, requires-body=1, argument=2
+BaiduWenku_remove_ads-op3 = type=http-response, pattern=^https://appwk\.baidu\.com/appapi/forum/feed\?reqMode=wenkuapp_main_feed, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/BaiduWenku_remove_ads.js, requires-body=1, argument=3
+
+[MITM]
+hostname = %APPEND% appwk.baidu.com, tanbi.baidu.com

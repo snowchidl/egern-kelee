@@ -1,0 +1,13 @@
+#!name=微信公众号去广告（Egern转换版）
+#!desc=过滤微信公众号广告｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+DOMAIN-SUFFIX, wxs.qq.com, REJECT
+
+[URL Rewrite]
+^https://mp\.weixin\.qq\.com/mp/(cps_product_info|getappmsgad|jsmonitor|masonryfeed|relatedarticle)\? reject-dict
+^https://mp\.weixin\.qq\.com/mp/relatedsearchword reject-dict
+
+[MITM]
+hostname = %APPEND% mp.weixin.qq.com

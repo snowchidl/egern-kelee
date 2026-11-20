@@ -1,0 +1,15 @@
+#!name=DREAME去广告（Egern转换版）
+#!desc=移除开屏广告、首页大图推广、横幅推广，精简底栏，阻止桌面图标替换。仅支持2.5.1版。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://cn\.iot\.dreame\.tech:\d+/dreame-product/public/advertisement/ reject-dict
+^https://cn-mall\.dreame\.tech/dreame-mall/api/v1/tag/list$ reject-dict
+^https://cn-wxmall\.dreame\.tech/main/goods/get-topgoods$ reject-dict
+
+[Script]
+DREAME_remove_ads-op0 = type=http-response, pattern=^https://cn\.iot\.dreame\.tech:\d+/dreame-product/public/common-plugin$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DREAME_remove_ads.js, argument=0
+DREAME_remove_ads-op1 = type=http-response, pattern=^https://cn\.iot\.dreame\.tech:13267/dreame-system/dreame-app/setting/query$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DREAME_remove_ads.js, requires-body=1, argument=1
+
+[MITM]
+hostname = %APPEND% cn-mall.dreame.tech, cn-wxmall.dreame.tech, cn.iot.dreame.tech

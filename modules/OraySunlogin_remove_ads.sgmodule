@@ -1,0 +1,9 @@
+#!name=向日葵去广告（Egern转换版）
+#!desc=移除开屏广告、广告横幅。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://client-api-v2\.oray\.com/materials/SLCC_iOS_DEVICE_FREE\? reject-dict
+
+[MITM]
+hostname = %APPEND% client-api-v2.oray.com

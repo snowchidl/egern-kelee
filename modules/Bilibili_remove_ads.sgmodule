@@ -1,0 +1,39 @@
+#!name=哔哩哔哩去广告（Egern转换版）
+#!desc=过滤哔哩哔哩广告、移除青少年模式弹窗和交互式弹幕、移除无用功能和链接跟踪参数，增加空降助手以便跳过视频中插入的广告。此插件仅建议iOS 15以上设备使用，且必须启用MitM-over-HTTP/2功能。\n\n空降助手是第三方提供的功能，依赖于Android版空降助手的服务器数据运作，可能会存在不准确或者失效的问题，此功能与哔哩哔哩官方无关。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+DOMAIN, bsbsb.top, PROXY
+DOMAIN, api.biliapi.com, REJECT
+DOMAIN, app.biliapi.com, REJECT
+DOMAIN, api.biliapi.net, REJECT
+DOMAIN, app.biliapi.net, REJECT
+AND, ((DOMAIN-SUFFIX, chat.bilibili.com), (OR, ((DOMAIN-KEYWORD, stun), (DOMAIN-KEYWORD, tracker), (DOMAIN-KEYWORD, p2p)))), REJECT
+
+[URL Rewrite]
+^https://line3-h5-mobile-api\.biligame\.com/game/live/large_card_material\? reject-dict
+^https://api\.live\.bilibili\.com/xlive/e-commerce-interface/v1/ecommerce-user/get_shopping_info\? reject-dict
+
+[Script]
+Bilibili_remove_ads-op0 = type=http-response, pattern=^https://api\.bilibili\.com/x/pd-proxy/tracker\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Bilibili_remove_ads.js, requires-body=1, argument=0
+Bilibili_remove_ads-op1 = type=http-response, pattern=^https://app\.bilibili\.com/x/v2/splash/(show|event/list2)\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Bilibili_remove_ads.js, requires-body=1, argument=1
+Bilibili_remove_ads-op2 = type=http-response, pattern=^https://app\.bilibili\.com/x/v2/splash/list\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Bilibili_remove_ads.js, argument=2
+Bilibili_remove_ads-op3 = type=http-response, pattern=^https://app\.bilibili\.com/x/resource/show/tab/v2\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Bilibili_remove_ads.js, requires-body=1, argument=3
+Bilibili_remove_ads-op4 = type=http-response, pattern=^https://app\.bilibili\.com/x/v2/feed/index\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Bilibili_remove_ads.js, requires-body=1, argument=4
+Bilibili_remove_ads-op5 = type=http-response, pattern=^https://api\.bilibili\.com/pgc/activity/deliver/material/receive\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Bilibili_remove_ads.js, argument=5
+Bilibili_remove_ads-op6 = type=http-response, pattern=^https://api\.bilibili\.com/pgc/view/v2/app/season\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Bilibili_remove_ads.js, requires-body=1, argument=6
+Bilibili_remove_ads-op7 = type=http-response, pattern=^https://api\.bilibili\.com/pgc/page/channel\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Bilibili_remove_ads.js, requires-body=1, argument=7
+Bilibili_remove_ads-op8 = type=http-response, pattern=^https://app\.bilibili\.com/x/v2/feed/index/story\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Bilibili_remove_ads.js, requires-body=1, argument=8
+Bilibili_remove_ads-op9 = type=http-response, pattern=^https://ap[ip]\.bilibili\.com/x/(resource/(top/activity|patch/tab(/v2)?)|v2/search/square|vip/ads/materials)\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Bilibili_remove_ads.js, argument=9
+Bilibili_remove_ads-op10 = type=http-response, pattern=^https://api\.live\.bilibili\.com/xlive/open-interface/v2/tracker/conf\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Bilibili_remove_ads.js, requires-body=1, argument=10
+Bilibili_remove_ads-op11 = type=http-response, pattern=^https://app\.bilibili\.com/x/resource/show/skin\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Bilibili_remove_ads.js, requires-body=1, argument=11
+Bilibili_remove_ads-op12 = type=http-response, pattern=^https://app\.bilibili\.com/x/v2/account/mine(/ipad)?\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Bilibili_remove_ads.js, requires-body=1, argument=12
+Bilibili_remove_ads-op13 = type=http-response, pattern=^https://app\.bilibili\.com/x/v2/account/myinfo\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Bilibili_remove_ads.js, requires-body=1, argument=13
+Bilibili_remove_ads-op14 = type=http-response, pattern=^https://grpc\.biliapi\.net/bilibili\.app\.(interface\.v1\.(Teenagers/ModeStatus|Search/DefaultWords)|view\.v1\.View/TFInfo|viewunite\.v1\.View/(PlayPause|ViewEndPage))$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Bilibili_remove_ads.js, argument=14
+空降助手 = type=http-request, pattern=^https://(?:grpc\.biliapi\.net|app\.bilibili\.com)/bilibili\.community\.service\.dm\.v1\.DM/DmSegMobile$, script-path=https://raw.githubusercontent.com/CodeApe-Xiaoyin/loon-plugins/kelee-snapshot-2026-11-10/vendor/kelee/resources/kelee.one/Resource/JavaScript/Bilibili/Bilibili_proto_request_kokoryh.js, requires-body=1, binary-body-mode=1
+请求处理 = type=http-request, pattern=^https://(?:grpc\.biliapi\.net|app\.bilibili\.com)/bilibili\.(?:app\.viewunite\.v1\.View/View|main\.community\.reply\.v1\.Reply/MainList)$, script-path=https://raw.githubusercontent.com/CodeApe-Xiaoyin/loon-plugins/kelee-snapshot-2026-11-10/vendor/kelee/resources/kelee.one/Resource/JavaScript/Bilibili/Bilibili_proto_request_kokoryh.js, requires-body=1, binary-body-mode=1
+ProtoBuf处理 = type=http-response, pattern=^https://(grpc\.biliapi\.net|app\.bilibili\.com)/bilibili\.(app\.(show\.v1\.Popular/Index|dynamic\.v2\.Dynamic/DynAll|view(unite)?\.v1\.View/(View|ViewProgress|RelatesFeed|AIRelateAsync)|playurl\.v1\.PlayURL/PlayView|playerunite\.v1\.Player/PlayViewUnite)|polymer\.app\.search\.v1\.Search/SearchAll|community\.service\.dm\.v1\.DM/DmView|main\.community\.reply\.v1\.Reply/MainList|pgc\.gateway\.player\.v2\.PlayURL/PlayView)$, script-path=https://raw.githubusercontent.com/CodeApe-Xiaoyin/loon-plugins/kelee-snapshot-2026-11-10/vendor/kelee/resources/kelee.one/Resource/JavaScript/Bilibili/Bilibili_proto_response_kokoryh.js, requires-body=1, binary-body-mode=1
+移除直播间广告 = type=http-response, pattern=^https://api\.live\.bilibili\.com/xlive/(?:app-interface/v2/index/feed|app-room/v1/index/getInfoBy(?:Room|User))\?, script-path=https://raw.githubusercontent.com/CodeApe-Xiaoyin/loon-plugins/kelee-snapshot-2026-11-10/vendor/kelee/resources/kelee.one/Resource/JavaScript/Bilibili/Bilibili_json_kokoryh.js, requires-body=1
+
+[MITM]
+hostname = %APPEND% grpc.biliapi.net, app.bilibili.com, api.bilibili.com, api.live.bilibili.com, line3-h5-mobile-api.biligame.com

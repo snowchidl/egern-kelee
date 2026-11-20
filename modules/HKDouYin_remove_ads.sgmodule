@@ -1,0 +1,25 @@
+#!name=香港抖音去广告（Egern转换版）
+#!desc=精简左右侧边栏、移除底栏切换，其余内容后续再完善。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+AND, ((IP-CIDR, 101.126.58.201/32, no-resolve), (DEST-PORT, 6443)), REJECT
+AND, ((IP-CIDR, 110.249.199.75/32, no-resolve), (DEST-PORT, 6443)), REJECT
+AND, ((IP-CIDR, 111.225.147.191/32, no-resolve), (DEST-PORT, 6443)), REJECT
+AND, ((IP-CIDR, 111.63.61.101/32, no-resolve), (DEST-PORT, 6443)), REJECT
+AND, ((IP-CIDR, 220.243.141.0/32, no-resolve), (DEST-PORT, 6443)), REJECT
+AND, ((OR, ((DOMAIN-SUFFIX, bytegecko.com), (DOMAIN-SUFFIX, byteeffecttos.com))), (DOMAIN-KEYWORD, ncdn)), REJECT
+
+[URL Rewrite]
+^https://api5-normal-lq\.amemv\.com/api/ad/ reject
+^https://(aweme\.snssdk\.com|api5-normal-m\.amemv\.com)/api/ad/ reject
+^https://zlink\.ugsdk\.cn/ad/ reject
+
+[Script]
+HKDouYin_remove_ads-op0 = type=http-response, pattern=^https://((aweme\.snssdk\.com|api5-normal-m\.amemv\.com)|api5-normal-m\.amemv\.com)/aweme/homepage/sidebar_data/\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/HKDouYin_remove_ads.js, requires-body=1, argument=0
+HKDouYin_remove_ads-op1 = type=http-response, pattern=^https://(aweme\.snssdk\.com|api5-normal-m\.amemv\.com)/aweme/homepage/render/\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/HKDouYin_remove_ads.js, requires-body=1, argument=1
+HKDouYin_remove_ads-op2 = type=http-response, pattern=^https://(aweme\.snssdk\.com|api5-normal-m\.amemv\.com)/aweme/homepage/render/\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/HKDouYin_remove_ads.js, requires-body=1, argument=2
+HKDouYin_remove_ads-op3 = type=http-response, pattern=^https://(aweme\.snssdk\.com|api5-normal-m\.amemv\.com)/tfe/api/request_combine/v1/\?need_personal_recommend, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/HKDouYin_remove_ads.js, requires-body=1, argument=3
+
+[MITM]
+hostname = %APPEND% aweme.snssdk.com, api5-normal-m.amemv.com

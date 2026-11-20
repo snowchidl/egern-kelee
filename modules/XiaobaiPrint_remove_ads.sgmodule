@@ -1,0 +1,19 @@
+#!name=小白智慧打印去广告（Egern转换版）
+#!desc=移除开屏广告、首页推广金刚位、热门内容推荐、横幅广告、搜索填充词、搜索发现，精简我的页面。账户页面错误是已知问题，无需反馈。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+DOMAIN, ad.lovefree.cc, REJECT
+DOMAIN-SUFFIX, adwanji.com, REJECT
+
+[URL Rewrite]
+^https://epbox\.gongfudou\.com/big_data/v\d/banners\? reject-dict
+^https://epbox\.gongfudou\.com/big_data/v\d/canvas/query_actions\? reject-dict
+
+[Script]
+XiaobaiPrint_remove_ads-op0 = type=http-response, pattern=^https://epbox\.gongfudou\.com/graphql$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/XiaobaiPrint_remove_ads.js, requires-body=1, argument=0
+XiaobaiPrint_remove_ads-op1 = type=http-response, pattern=^https://epbox\.gongfudou\.com/graphql$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/XiaobaiPrint_remove_ads.js, requires-body=1, argument=1
+XiaobaiPrint_remove_ads-op2 = type=http-response, pattern=^https://epbox\.gongfudou\.com/graphql$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/XiaobaiPrint_remove_ads.js, requires-body=1, argument=2
+
+[MITM]
+hostname = %APPEND% epbox.gongfudou.com, epbox.gongfudou.com

@@ -1,0 +1,20 @@
+#!name=小睡眠去广告（Egern转换版）
+#!desc=移除开屏广告、信息流广告、弹窗广告、轮播图广告、侧边栏横幅广告，精简搜索页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://api\.psy-1\.com/cosleep/startup\? reject-dict
+^https://api\.psy-1\.com/cosleep/ad/ reject-dict
+^https://api\.psy-1\.com/cosleep/user/identity/ad\? reject-dict
+^https://api\.psy-1\.com/cosleep/discover/ad$ reject-dict
+^https://api\.psy-1\.com/cosleep/home/activity\? reject-dict
+^https://api\.psy-1\.com/cosleep/newborn/ad/ reject-dict
+^https://api\.psy-1\.com/cosleep/my/ad\? reject-dict
+^https://api\.psy-1\.com/cosleep/search/config\? reject-dict
+^https://api\.psy-1\.com/cosleep/newborn/search/ranks\? reject-dict
+^https://api\.psy-1\.com/cosleep/search/inputs\? reject-dict
+^https://api\.psy-1\.com/cosleep/newborn/sleeps/guides/banner\? reject-dict
+^https://api\.psy-1\.com/cosleep/newborn/search/ranks/items\? reject-dict
+
+[MITM]
+hostname = %APPEND% api.psy-1.com

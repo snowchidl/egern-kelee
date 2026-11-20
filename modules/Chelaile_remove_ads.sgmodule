@@ -1,0 +1,22 @@
+#!name=车来了去广告（Egern转换版）
+#!desc=清洗配置，移除开屏广告、首页金刚位、文章推荐，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+DOMAIN, ad.chelaile.net.cn, REJECT
+
+[URL Rewrite]
+^https://cdn\.web\.chelaile\.net\.cn/info-flow/index\.html\? reject
+^https://image3\.chelaile\.net\.cn/hw6u6LYY\.png$ reject-img
+
+[Script]
+Chelaile_remove_ads-op0 = type=http-response, pattern=^https://api\.chelaile\.net\.cn/goocity/flowPos/home\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Chelaile_remove_ads.js, argument=0
+Chelaile_remove_ads-op1 = type=http-response, pattern=^https://api\.chelaile\.net\.cn/goocity/flowPos/listByPos\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Chelaile_remove_ads.js, argument=1
+Chelaile_remove_ads-op2 = type=http-response, pattern=^https://web\.chelaile\.net\.cn/api/operative_position/infoflow/getInfo\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Chelaile_remove_ads.js, argument=2
+Chelaile_remove_ads-op3 = type=http-response, pattern=^https://api\.chelaile\.net\.cn/led-weather/v\d/condition_brief\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Chelaile_remove_ads.js, argument=3
+Chelaile_remove_ads-op4 = type=http-response, pattern=^https://api\.chelaile\.net\.cn/goocity/config/notices\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Chelaile_remove_ads.js, argument=4
+Chelaile_remove_ads-op5 = type=http-response, pattern=^https://api\.chelaile\.net\.cn/encourage/activity/control\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Chelaile_remove_ads.js, argument=5
+清洗配置 = type=http-response, pattern=^https://api\.chelaile\.net\.cn/bus-side/appToggle/getStatus\?, script-path=https://raw.githubusercontent.com/CodeApe-Xiaoyin/loon-plugins/kelee-snapshot-2026-11-10/vendor/kelee/resources/kelee.one/Resource/JavaScript/Chelaile/Chelaile_remove_ads.js, requires-body=1
+
+[MITM]
+hostname = %APPEND% api.chelaile.net.cn, web.chelaile.net.cn, cdn.web.chelaile.net.cn, image3.chelaile.net.cn

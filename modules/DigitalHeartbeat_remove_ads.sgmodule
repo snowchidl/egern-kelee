@@ -1,0 +1,17 @@
+#!name=数字心动去广告（Egern转换版）
+#!desc=移除开屏广告、首页顶部标签、轮播图、悬浮挂件、热门搜索、信息流广告。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://api-changzheng\.chinaath\.com/changzheng-basic-center-api/api/appConfigBanner/listBannerRelease\? reject-dict
+^https://api-changzheng\.chinaath\.com/changzheng-content-center-api/api/global/search/hotSearch/list$ reject-dict
+^https://api-changzheng\.chinaath\.com/changzheng-basic-center-api/api/advertisement/ reject-dict
+
+[Script]
+DigitalHeartbeat_remove_ads-op0 = type=http-response, pattern=^https://api-changzheng\.chinaath\.com/changzheng-common-proxy-api/api/advertising/proxy/getOpenScreenAdvertising$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DigitalHeartbeat_remove_ads.js, requires-body=1, argument=0
+DigitalHeartbeat_remove_ads-op1 = type=http-response, pattern=^https://api-changzheng\.chinaath\.com/changzheng-race-proxy-api/api/home/page/getBrand$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DigitalHeartbeat_remove_ads.js, requires-body=1, argument=1
+DigitalHeartbeat_remove_ads-op2 = type=http-response, pattern=^https://api-changzheng\.chinaath\.com/changzheng-race-proxy-api/api/home/page/get$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DigitalHeartbeat_remove_ads.js, requires-body=1, argument=2
+DigitalHeartbeat_remove_ads-op3 = type=http-response, pattern=^https://api-changzheng\.chinaath\.com/changzheng-race-proxy-api/api/home/page/get$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DigitalHeartbeat_remove_ads.js, requires-body=1, argument=3
+
+[MITM]
+hostname = %APPEND% api-changzheng.chinaath.com

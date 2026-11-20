@@ -1,0 +1,9 @@
+#!name=创维智慧云去广告（Egern转换版）
+#!desc=移除开屏广告、横幅广告。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://app\.skyworthdigitaliot\.com/skyworthOperation/v\d/appOperation/allBannerConfig\? reject-dict
+
+[MITM]
+hostname = %APPEND% app.skyworthdigitaliot.com

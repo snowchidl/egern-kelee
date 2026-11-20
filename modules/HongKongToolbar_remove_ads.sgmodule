@@ -1,0 +1,10 @@
+#!name=Hong Kong Toolbar去广告（Egern转换版）
+#!desc=移除开屏互动广告、直播前贴片广告及视频广告｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+URL-REGEX, "^https:\/\/a\.881903\.com\/live\/preroll\/.*\/.*", REJECT-DROP
+URL-REGEX, "^https:\/\/a\.881903\.com\/v\d\/app\/game\/.*", REJECT-DROP
+
+[MITM]
+hostname = %APPEND% a.881903.com

@@ -1,0 +1,14 @@
+#!name=沃尔玛去广告（Egern转换版）
+#!desc=移除操作引导、商品详情页用户调研、搜索填充词和搜索发现，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://api-hyper\.walmartmobile\.cn/search/ad/ reject-dict
+^https://api-hyper\.walmartmobile\.cn/cms-web/frontapi/shadedWords/list\? reject-dict
+^https://api-hyper\.walmartmobile\.cn/search/frontapi/discovery-words/list$ reject-dict
+
+[Script]
+Walmart_remove_ads-op0 = type=http-response, pattern=^https://api-hyper\.walmartmobile\.cn/cms-web/frontapi/common/page/get\?.*&type=26$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Walmart_remove_ads.js, requires-body=1, argument=0
+
+[MITM]
+hostname = %APPEND% api-hyper.walmartmobile.cn

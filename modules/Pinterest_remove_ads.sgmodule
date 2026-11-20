@@ -1,0 +1,10 @@
+#!name=Pinterest去广告（Egern转换版）
+#!desc=移除瀑布流、更多探索内容中的广告｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Script]
+Pinterest_remove_ads-op0 = type=http-response, pattern=^https://api\.pinterest\.com/v\d/feeds/home/\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Pinterest_remove_ads.js, requires-body=1, argument=0
+Pinterest_remove_ads-op1 = type=http-response, pattern=^https://api\.pinterest\.com/v\d/pins/\d+/related/modules/\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Pinterest_remove_ads.js, requires-body=1, argument=1
+
+[MITM]
+hostname = %APPEND% api.pinterest.com

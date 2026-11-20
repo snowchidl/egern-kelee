@@ -1,0 +1,9 @@
+#!name=Foodie去广告（Egern转换版）
+#!desc=移除开屏广告和弹窗广告｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+DOMAIN, api-ad.kajicam.com, REJECT
+DOMAIN, zjres-ad.kajicam.com, REJECT
+DOMAIN, popup-api.b612kaji.com, REJECT
+

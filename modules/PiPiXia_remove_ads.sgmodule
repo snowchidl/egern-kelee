@@ -1,0 +1,15 @@
+#!name=皮皮虾去广告（Egern转换版）
+#!desc=移除开屏广告、评论区广告、视频流广告，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://api(5-lq)?\.pipix\.com/api/ad/ reject-dict
+^https://api(5-lq)?\.pipix\.com/bds/banner/ reject-dict
+^https://api(5-lq)?\.pipix\.com/bds/feed/follow_feed/ reject-dict
+
+[Script]
+PiPiXia_remove_ads-op0 = type=http-response, pattern=^https://api(5-lq)?\.pipix\.com/bds/feed/stream/v2/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/PiPiXia_remove_ads.js, requires-body=1, argument=0
+PiPiXia_remove_ads-op1 = type=http-response, pattern=^https://api(5-lq)?\.pipix\.com/bds/user/check_in/, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/PiPiXia_remove_ads.js, requires-body=1, argument=1
+
+[MITM]
+hostname = %APPEND% api.pipix.com, api5-lq.pipix.com

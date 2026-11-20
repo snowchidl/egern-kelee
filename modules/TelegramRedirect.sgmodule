@@ -1,0 +1,10 @@
+#!name=Telegram重定向（Egern转换版）
+#!desc=适用于安装了多个不同Telegram客户端的用户，用于在指定客户端中打开公开或私有群组及频道的Telegram短链。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://t\.me/([A-Za-z][A-Za-z0-9_]{3,30}[A-Za-z0-9])/?$ tg://resolve?domain=$1 307
+^https://t\.me/\+([A-Za-z0-9_-]+)/?$ tg://join?invite=$1 307
+
+[MITM]
+hostname = %APPEND% t.me

@@ -1,0 +1,33 @@
+#!name=高德地图去广告（Egern转换版）
+#!desc=移除开屏广告、首页推荐、搜索推荐、打车广告、地点推荐及广告，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://m5\.amap\.com/ws/valueadded/alimama/splash_screen\? reject-dict
+^https://m5\.amap\.com/ws/faas/amap-navigation/main-page-assets\? reject-dict
+^https://m5\.amap\.com/ws/faas/amap-navigation/main-page-aiqs\? reject-dict
+^https://ai\.amap\.com/v1/ai_rec/home_qs\? reject-dict
+^https://m5-zb\.amap\.com/ws/promotion-web/resource(/home)?\? reject-dict
+^https://m5\.amap\.com/ws/info_bff/rankingCard\? reject-dict
+^https://m5\.amap\.com/ws/shield/search_business/process/marketingOperationStructured\? reject-dict
+
+[Script]
+Amap_remove_ads-op0 = type=http-response, pattern=^https://m5\.amap\.com/ws/shield/frogserver/aocs/updatable/1\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Amap_remove_ads.js, requires-body=1, argument=0
+Amap_remove_ads-op1 = type=http-response, pattern=^https://m5\.amap\.com/ws/shield/frogserver/aocs/updatable/1\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Amap_remove_ads.js, requires-body=1, argument=1
+Amap_remove_ads-op2 = type=http-response, pattern=^https://m5\.amap\.com/ws/shield/dsp/profile/index/nodefaasv3\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Amap_remove_ads.js, requires-body=1, argument=2
+Amap_remove_ads-op3 = type=http-response, pattern=^https://m5\.amap\.com/ws/shield/scene/recommend\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Amap_remove_ads.js, requires-body=1, argument=3
+Amap_remove_ads-op4 = type=http-response, pattern=^https://m5\.amap\.com/ws/shield/scene/recommend\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Amap_remove_ads.js, requires-body=1, argument=4
+Amap_remove_ads-op5 = type=http-response, pattern=^https://sns\.amap\.com/ws/opc/tools/list\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Amap_remove_ads.js, requires-body=1, argument=5
+Amap_remove_ads-op6 = type=http-response, pattern=^https://info\.amap\.com/ws/c3frontend/af-search/search\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Amap_remove_ads.js, requires-body=1, argument=6
+Amap_remove_ads-op7 = type=http-response, pattern=^https://m5-zb\.amap\.com/ws/boss/car/order/content_info\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Amap_remove_ads.js, requires-body=1, argument=7
+Amap_remove_ads-op8 = type=http-response, pattern=^https://m5-zb\.amap\.com/ws/boss/car/order/content_info\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Amap_remove_ads.js, requires-body=1, argument=8
+Amap_remove_ads-op9 = type=http-response, pattern=^https://m5-zb\.amap\.com/ws/amap/hitch/passenger/content_info\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Amap_remove_ads.js, requires-body=1, argument=9
+Amap_remove_ads-op10 = type=http-response, pattern=^https://center\.amap\.com/ws/amc/server/conv/raise_list\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Amap_remove_ads.js, requires-body=1, argument=10
+Amap_remove_ads-op11 = type=http-response, pattern=^https://m5\.amap\.com/ws/shield/scene/recommend\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Amap_remove_ads.js, requires-body=1, argument=11
+Amap_remove_ads-op12 = type=http-response, pattern=^https://info\.amap\.com/ws/shield/search_business/process/middleLayer/sug\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Amap_remove_ads.js, requires-body=1, argument=12
+Amap_remove_ads-op13 = type=http-response, pattern=^https://info\.amap\.com/ws/shield/search/poi/detail\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Amap_remove_ads.js, requires-body=1, argument=13
+Amap_remove_ads-op14 = type=http-response, pattern=^https://info\.amap\.com/ws/shield/search/poi/detail\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Amap_remove_ads.js, requires-body=1, argument=14
+Amap_remove_ads-op15 = type=http-response, pattern=^https://m5\.amap\.com/ws/smartui/near_recommend\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Amap_remove_ads.js, requires-body=1, argument=15
+
+[MITM]
+hostname = %APPEND% m5.amap.com, ai.amap.com, m5-zb.amap.com, center.amap.com, sns.amap.com, info.amap.com

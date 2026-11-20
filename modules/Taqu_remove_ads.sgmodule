@@ -1,0 +1,22 @@
+#!name=他趣去广告（Egern转换版）
+#!desc=移除各类弹窗、横幅，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://gw-cn\.jiaoliuqu\.com/taqu-homepage/v\d/Banner/getBannerByPositions\? reject-dict
+^https://gw-cn\.jiaoliuqu\.com/bbs/v5/Guide/photoGuide\? reject-dict
+^https://gw-cn\.jiaoliuqu\.com/i/v\d/homepage/completeGuideV\d\? reject-dict
+^https://gw-cn\.jiaoliuqu\.com/i/v\d/asset/toast\? reject-dict
+^https://gw-cn\.jiaoliuqu\.com/bbs/v5/Sign/getDailySigninInfoV4\? reject-dict
+^https://gw-cn\.jiaoliuqu\.com/taqu-hichat/v\d/Hichat/getRecommendInfo\? reject-dict
+^https://gw-cn\.jiaoliuqu\.com/live_api/v\d/Banner/getBannerListV\d\? reject-dict
+^https://gw-cn\.jiaoliuqu\.com/live_api/v\d/HallScroll/getList\? reject-dict
+^https://gw-cn\.jiaoliuqu\.com/taqu-msg-guide/v\d/RecommendColumn/getList\? reject-dict
+
+[Script]
+Taqu_remove_ads-op0 = type=http-response, pattern=^https://gw-cn\.jiaoliuqu\.com/mp-dolphin/v\d/rec/recByPositions\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Taqu_remove_ads.js, requires-body=1, argument=0
+Taqu_remove_ads-op1 = type=http-response, pattern=^https://gw-cn\.jiaoliuqu\.com/mp-dolphin/v\d/rec/recByPositions\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Taqu_remove_ads.js, requires-body=1, argument=1
+Taqu_remove_ads-op2 = type=http-response, pattern=^https://gw-cn\.jiaoliuqu\.com/bbs/v5/Home/getHomePageModulesBySortV\d\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Taqu_remove_ads.js, requires-body=1, argument=2
+
+[MITM]
+hostname = %APPEND% gw-cn.jiaoliuqu.com

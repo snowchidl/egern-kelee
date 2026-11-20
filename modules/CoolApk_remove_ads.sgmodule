@@ -1,0 +1,17 @@
+#!name=酷安去广告（Egern转换版）
+#!desc=过滤酷安广告｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://api\.coolapk\.com/v6/search\?.*type=hotSearch reject-dict
+
+[Script]
+CoolApk_remove_ads-op0 = type=http-response, pattern=^https://api\.coolapk\.com/v6/feed/detail\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/CoolApk_remove_ads.js, requires-body=1, argument=0
+CoolApk_remove_ads-op1 = type=http-response, pattern=^https://api\.coolapk\.com/v6/feed/replyList, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/CoolApk_remove_ads.js, requires-body=1, argument=1
+CoolApk_remove_ads-op2 = type=http-response, pattern=^https://api\.coolapk\.com/v6/main/dataList, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/CoolApk_remove_ads.js, requires-body=1, argument=2
+CoolApk_remove_ads-op3 = type=http-response, pattern=^https://api\.coolapk\.com/v6/page/dataList, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/CoolApk_remove_ads.js, requires-body=1, argument=3
+CoolApk_remove_ads-op4 = type=http-response, pattern=^https://api\.coolapk\.com/v6/main/indexV8, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/CoolApk_remove_ads.js, requires-body=1, argument=4
+CoolApk_remove_ads-op5 = type=http-response, pattern=^https://api\.coolapk\.com/v6/main/init, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/CoolApk_remove_ads.js, requires-body=1, argument=5
+
+[MITM]
+hostname = %APPEND% api.coolapk.com

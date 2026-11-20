@@ -1,0 +1,14 @@
+#!name=慧生活798去广告（Egern转换版）
+#!desc=移除开屏广告、横幅广告，精简底栏。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://i\.ilife798\.com/api/v\d/acc/score/mission-lst$ reject-dict
+^https://i\.ilife798\.com/api/v\d/ep/lst-simple\? reject-dict
+^https://i\.ilife798\.com/api/v\d/ui/app/master$ reject-dict
+
+[Script]
+SmartLife_remove_ads-op0 = type=http-response, pattern=^https://i\.ilife798\.com/api/v\d/acc/login$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/SmartLife_remove_ads.js, requires-body=1, argument=0
+
+[MITM]
+hostname = %APPEND% i.ilife798.com

@@ -1,0 +1,12 @@
+#!name=小黑盒去广告（Egern转换版）
+#!desc=移除开屏广告和热点板块信息流广告｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://api\.xiaoheihe\.cn/account/get_ads_info_v2 reject-dict
+
+[Script]
+XiaoHeiHe_remove_ads-op0 = type=http-response, pattern=^https://api\.xiaoheihe\.cn/bbs/app/feeds/news, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/XiaoHeiHe_remove_ads.js, requires-body=1, argument=0
+
+[MITM]
+hostname = %APPEND% api.xiaoheihe.cn

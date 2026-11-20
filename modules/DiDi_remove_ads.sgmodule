@@ -1,0 +1,42 @@
+#!name=滴滴去广告（Egern转换版）
+#!desc=移除开屏广告、弹窗广告、横幅推广，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+DOMAIN, gwp.xiaojukeji.com, REJECT
+DOMAIN, gwpgz.diditaxi.com.cn, REJECT
+DOMAIN, adtrack.xiaojukeji.com, REJECT
+
+[URL Rewrite]
+^https://res\.xiaojukeji\.com/resapi/activity/mget\? reject-dict
+^https://res\.xiaojukeji\.com/resapi/activity/mget$ reject-dict
+^https://daijia\.kuaidadi\.com(:443)?/gateway\?api=prado\.cms\.delivery\.batch reject-dict
+^https://daijia\.kuaidadi\.com(:443)?/gateway\?api=prado\.cms\.AggregateDeliveryRemoteService\.aggregateDelivery reject-dict
+^https://daijia\.kuaidadi\.com(:443)?/gateway\?api=lj\.c\.p\.queryLevelAndRightsStatus reject-dict
+^https://daijia\.kuaidadi\.com(:443)?/gateway\?api=lj\.cos\.p\.popup reject-dict
+^https://api\.udache\.com/gulfstream/porsche/v\d/pSFCHomePage\? reject-dict
+^https://htwkop-st\.xiaojukeji\.com/gateway\?api=cms\.htw\.delivery\.batch reject-dict
+^https://freight\.xiaojukeji\.com/gateway\?api=freight\.d\.core\.multiDisplayV\d reject-dict
+
+[Script]
+DiDi_remove_ads-op0 = type=http-response, pattern=^https://as\.xiaojukeji\.com/ep/as/toggles\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DiDi_remove_ads.js, requires-body=1, argument=0
+DiDi_remove_ads-op1 = type=http-response, pattern=^https://conf\.diditaxi\.com\.cn/homepage/v\d/other/slow\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DiDi_remove_ads.js, requires-body=1, argument=1
+DiDi_remove_ads-op2 = type=http-response, pattern=^https://conf\.diditaxi\.com\.cn/homepage/v\d/core\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DiDi_remove_ads.js, requires-body=1, argument=2
+DiDi_remove_ads-op3 = type=http-response, pattern=^https://conf\.diditaxi\.com\.cn/homepage/v\d/other/fast\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DiDi_remove_ads.js, requires-body=1, argument=3
+DiDi_remove_ads-op4 = type=http-response, pattern=^https://common\.diditaxi\.com\.cn/common/v\d/usercenter/layout, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DiDi_remove_ads.js, requires-body=1, argument=4
+DiDi_remove_ads-op5 = type=http-response, pattern=^https://conf\.diditaxi\.com\.cn/homepage/v\d/other/fast\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DiDi_remove_ads.js, requires-body=1, argument=5
+DiDi_remove_ads-op6 = type=http-response, pattern=^https://api\.udache\.com/gulfstream/porsche/v\d/dache_homepage_layout\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DiDi_remove_ads.js, requires-body=1, argument=6
+DiDi_remove_ads-op7 = type=http-response, pattern=^https://api\.udache\.com/gulfstream/porsche/v\d/dache_homepage_layout\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DiDi_remove_ads.js, requires-body=1, argument=7
+DiDi_remove_ads-op8 = type=http-response, pattern=^https://api\.udache\.com/intercity/ticket/api/v\d/core/getFullPageInfoLayout\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DiDi_remove_ads.js, requires-body=1, argument=8
+DiDi_remove_ads-op9 = type=http-response, pattern=^https://daijia\.kuaidadi\.com(:443)?/gateway\?api=lj\.cos\.apolloConfig, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DiDi_remove_ads.js, requires-body=1, argument=9
+DiDi_remove_ads-op10 = type=http-response, pattern=^https://daijia\.kuaidadi\.com(:443)?/gateway\?api=lj\.cos\.apolloToggle, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DiDi_remove_ads.js, requires-body=1, argument=10
+DiDi_remove_ads-op11 = type=http-response, pattern=^https://api\.udache\.com/gulfstream/porsche/v\d/bronze/pinchengle_homepage_layout$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DiDi_remove_ads.js, requires-body=1, argument=11
+DiDi_remove_ads-op12 = type=http-response, pattern=^https://api\.udache\.com/gulfstream/porsche/v\d/SFCHomeTab\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DiDi_remove_ads.js, requires-body=1, argument=12
+DiDi_remove_ads-op13 = type=http-response, pattern=^https://htwkop\.xiaojukeji\.com(:443)?/gateway\?api=hm\.fa\.querySellCardSummary, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DiDi_remove_ads.js, requires-body=1, argument=13
+DiDi_remove_ads-op14 = type=http-response, pattern=^https://htwkop\.xiaojukeji\.com(:443)?/gateway\?api=hm\.fa\.queryWelfareCenter, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DiDi_remove_ads.js, requires-body=1, argument=14
+DiDi_remove_ads-op15 = type=http-response, pattern=^https://poi\.map\.xiaojukeji\.com/mapapi/startinfo\?api_version, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DiDi_remove_ads.js, requires-body=1, argument=15
+DiDi_remove_ads-op16 = type=http-response, pattern=^https://poi\.map\.xiaojukeji\.com/mapapi/poiinfo\?product_id, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DiDi_remove_ads.js, requires-body=1, argument=16
+DiDi_remove_ads-op17 = type=http-response, pattern=^https://common\.diditaxi\.com\.cn/user_common/itineraryList\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/DiDi_remove_ads.js, requires-body=1, argument=17
+
+[MITM]
+hostname = %APPEND% as.xiaojukeji.com, conf.diditaxi.com.cn, common.diditaxi.com.cn, res.xiaojukeji.com, api.udache.com, daijia.kuaidadi.com, htwkop-st.xiaojukeji.com, htwkop.xiaojukeji.com, freight.xiaojukeji.com, poi.map.xiaojukeji.com

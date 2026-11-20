@@ -1,0 +1,26 @@
+#!name=转转去广告（Egern转换版）
+#!desc=移除开屏广告、应用内悬浮窗、信息流推广、商品推荐、首页弹窗，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://app\.zhuanzhuan\.com/zz/v2/zzlogic/getOpenScreen$ reject-dict
+^https://app\.zhuanzhuan\.com/zz/v2/zzinfoshow/getwindvanecardv2$ reject-dict
+^https://app\.zhuanzhuan\.com/zzopen/popwindow/getallpopwin\? reject-dict
+^https://app\.zhuanzhuan\.com/zzopen/zzbmlogic/queryFrontPageWindowInfo\? reject-dict
+^https://app\.zhuanzhuan\.com/zzopen/ptuserlogic/subscribehotrecommend$ reject-dict
+^https://app\.zhuanzhuan\.com/zzopen/ypmall/listData$ reject-dict
+^https://app\.zhuanzhuan\.com/zz/v2/zzusercenter/myprofilevariouscards$ reject-dict
+
+[Script]
+ZhuanZhuan_remove_ads-op0 = type=http-response, pattern=^https://app\.zhuanzhuan\.com/zz/v2/zzlogic/mycontinenthomepage\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ZhuanZhuan_remove_ads.js, requires-body=1, argument=0
+ZhuanZhuan_remove_ads-op1 = type=http-response, pattern=^https://app\.zhuanzhuan\.com/zzx/transfer/getConfigInfo\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ZhuanZhuan_remove_ads.js, requires-body=1, argument=1
+ZhuanZhuan_remove_ads-op2 = type=http-response, pattern=^https://app\.zhuanzhuan\.com/zz/v2/zzinfoshow/getfeedflowinfo\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ZhuanZhuan_remove_ads.js, requires-body=1, argument=2
+ZhuanZhuan_remove_ads-op3 = type=http-response, pattern=^https://app\.zhuanzhuan\.com/zzopen/ptsimpleshow/recommendbymyloveinfo\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ZhuanZhuan_remove_ads.js, argument=3
+ZhuanZhuan_remove_ads-op4 = type=http-response, pattern=^https://app\.zhuanzhuan\.com/zz/v2/zzinfoshow/footprintsamerecommend\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ZhuanZhuan_remove_ads.js, argument=4
+ZhuanZhuan_remove_ads-op5 = type=http-response, pattern=^https://app\.zhuanzhuan\.com/zz/v2/zzinfoshow/getchoicegoodsinfos\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ZhuanZhuan_remove_ads.js, argument=5
+ZhuanZhuan_remove_ads-op6 = type=http-response, pattern=^https://app\.zhuanzhuan\.com/zz/transfer/getmymoretools$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ZhuanZhuan_remove_ads.js, requires-body=1, argument=6
+ZhuanZhuan_remove_ads-op7 = type=http-response, pattern=^https://app\.zhuanzhuan\.com/zz/transfer/getmyprofilev3$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ZhuanZhuan_remove_ads.js, requires-body=1, argument=7
+ZhuanZhuan_remove_ads-op8 = type=http-response, pattern=^https://app\.zhuanzhuan\.com/zz/transfer/getmyprofilev3$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ZhuanZhuan_remove_ads.js, requires-body=1, argument=8
+
+[MITM]
+hostname = %APPEND% app.zhuanzhuan.com

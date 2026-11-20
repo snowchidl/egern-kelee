@@ -1,0 +1,17 @@
+#!name=学习通去广告（Egern转换版）
+#!desc=移除开屏广告、横幅推广，精简校园补给站频道。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://home-yd\.chaoxing\.com/apis/data/getAdsRecommend\? reject-dict
+^https://home-yd\.chaoxing\.com/apis/banner/getConfigInfoForXsqy\? reject-dict
+^https://groupyd2\.chaoxing\.com/apis/activity/getActivitys_attention\? reject-dict
+^https://appswh\.chaoxing\.com/apis/activity/getNoteTopicList\? reject-dict
+
+[Script]
+ChaoXingStudy_remove_ads-op0 = type=http-response, pattern=^https://learn\.chaoxing\.com/apis/service/appConfig\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ChaoXingStudy_remove_ads.js, requires-body=1, argument=0
+ChaoXingStudy_remove_ads-op1 = type=http-response, pattern=^https://apps\.chaoxing\.com/apis/home/getHpXsqy\.jspx\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ChaoXingStudy_remove_ads.js, requires-body=1, argument=1
+ChaoXingStudy_remove_ads-op2 = type=http-response, pattern=^https://apps\.chaoxing\.com/apis/home/getHpXsqy\.jspx\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ChaoXingStudy_remove_ads.js, requires-body=1, argument=2
+
+[MITM]
+hostname = %APPEND% learn.chaoxing.com, home-yd.chaoxing.com, apps.chaoxing.com, groupyd2.chaoxing.com, appswh.chaoxing.com

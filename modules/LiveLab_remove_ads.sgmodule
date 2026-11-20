@@ -1,0 +1,15 @@
+#!name=纷玩岛去广告（Egern转换版）
+#!desc=移除开屏广告、弹窗广告、信息横幅推广、票夹页面横幅广告。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://api\.livelab\.com\.cn/pgc/advert/ reject-dict
+^https://api\.livelab\.com\.cn/search/appHotWords/app/queryHotWords$ reject-dict
+^https://api\.livelab\.com\.cn/appShow/hotSearch/app/rankList$ reject-dict
+^https://api\.livelab\.com\.cn/appShow/app/homepage/banners\?bannerModuleId=(82|84|53) reject-dict
+
+[Script]
+LiveLab_remove_ads-op0 = type=http-response, pattern=^https://api\.livelab\.com\.cn/appShow/app/homepage/modules\?tabId=5$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/LiveLab_remove_ads.js, requires-body=1, argument=0
+
+[MITM]
+hostname = %APPEND% api.livelab.com.cn

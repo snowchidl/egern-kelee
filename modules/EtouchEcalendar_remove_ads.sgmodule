@@ -1,0 +1,20 @@
+#!name=中华万年历去广告（Egern转换版）
+#!desc=移除开屏广告、弹窗、信息流推广，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+DOMAIN, sdk.ad.sfys365.com, REJECT
+
+[URL Rewrite]
+^https://client-lz\.rili\.cn/lizhi/api/auth/voice_room_entrance/list\? reject-dict
+^https://client-lz\.rili\.cn/lizhi/api/fortune/question_spots/panel\? reject-dict
+^https://client-lz\.rili\.cn/lizhi/api/jujia/flow\? reject-dict
+^https://client-lz\.rili\.cn/lizhi/api/album/hl_card\? reject-dict
+^https://client-lz\.rili\.cn/lizhi/api/fortune/overview\? reject-dict
+
+[Script]
+EtouchEcalendar_remove_ads-op0 = type=http-response, pattern=^https://v0-client-lz\.rili\.cn/lizhi/api/zhwnl/cal_module/(datas|config)\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/EtouchEcalendar_remove_ads.js, requires-body=1, argument=0
+EtouchEcalendar_remove_ads-op1 = type=http-response, pattern=^http://pc\.suishenyun\.net/peacock/api/adspool\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/EtouchEcalendar_remove_ads.js, requires-body=1, argument=1
+
+[MITM]
+hostname = %APPEND% v0-client-lz.rili.cn, client-lz.rili.cn

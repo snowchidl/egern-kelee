@@ -1,0 +1,16 @@
+#!name=京东外卖去广告（Egern转换版）
+#!desc=移除首页推广、点评页面非美食内容、购物车及我的页面推荐、搜索发现、搜索榜单，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://color\.jddj\.com/client\.action\?functionId=uniformRecommend reject-dict
+^https://color\.jddj\.com/client\.action\?functionId=search_recommendRanking$ reject-dict
+
+[Script]
+JDWaimai_remove_ads-op0 = type=http-response, pattern=^https://color\.jddj\.com/client\.action\?functionId=hours_home$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/JDWaimai_remove_ads.js, requires-body=1, argument=0
+JDWaimai_remove_ads-op1 = type=http-response, pattern=^https://color\.jddj\.com/client\.action\?functionId=wmHome$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/JDWaimai_remove_ads.js, requires-body=1, argument=1
+JDWaimai_remove_ads-op2 = type=http-response, pattern=^https://api\.m\.jd\.com/client\.action$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/JDWaimai_remove_ads.js, requires-body=1, argument=2
+JDWaimai_remove_ads-op3 = type=http-response, pattern=^https://api\.m\.jd\.com/client\.action$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/JDWaimai_remove_ads.js, requires-body=1, argument=3
+
+[MITM]
+hostname = %APPEND% color.jddj.com, api.m.jd.com

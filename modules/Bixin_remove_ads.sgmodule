@@ -1,0 +1,28 @@
+#!name=比心去广告（Egern转换版）
+#!desc=移除弹窗广告、悬浮广告、横幅广告、轮播图广告，精简搜索页及我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://web\.hibixin\.com/user-recall/signModal$ reject
+^https://api\.hibixin\.com/config/v\d/common/popup$ reject-dict
+^https://gateway\.hibixin\.com/resource/v\d/rec/card/query$ reject-dict
+^https://api\.hibixin\.com/msg/user/friends/trends/top$ reject-dict
+^https://gateway\.xxqapp\.cn/live/pendant/index/items$ reject-dict
+^https://api\.xxqapp\.cn/banner/list/\d$ reject-dict
+^https://api\.hibixin\.com/resource/v\d/discovery/entrance/activity$ reject-dict
+^https://gateway\.hibixin\.com/config/search/qryConfigPart$ reject-dict
+^https://gateway\.xxqapp\.cn/live/flow/pendant/meta$ reject-dict
+^https://web-bxyuer\.bixin\.cn/yuer-ads\? reject
+^https://gateway\.bxyuer\.com/official/room/tab/pop$ reject-dict
+^https://api\.hibixin\.com/biggie/query/skill/detail/relateRecommendBiggieV\d$ reject-dict
+
+[Script]
+Bixin_remove_ads-op0 = type=http-response, pattern=^https://api\.hibixin\.com/biggie/home/v\d/query/biggie$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Bixin_remove_ads.js, requires-body=1, argument=0
+Bixin_remove_ads-op1 = type=http-response, pattern=^https://api\.hibixin\.com/content/v\d/home/page/list$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Bixin_remove_ads.js, argument=1
+Bixin_remove_ads-op2 = type=http-response, pattern=^https://gateway\.xxqapp\.cn/living/room/fetch/recommend-follow-list$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Bixin_remove_ads.js, argument=2
+Bixin_remove_ads-op3 = type=http-response, pattern=^https://api\.hibixin\.com/resource/v\d/common/tab$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Bixin_remove_ads.js, requires-body=1, argument=3
+精简首页标签 = type=http-response, pattern=^https://gateway\.hibixin\.com/resource/v\d/common/tab/query$, script-path=https://raw.githubusercontent.com/CodeApe-Xiaoyin/loon-plugins/kelee-snapshot-2026-11-10/vendor/kelee/resources/kelee.one/Resource/JavaScript/Bixin/common_tab.js, requires-body=1
+精简我的页面 = type=http-response, pattern=^https://gateway\.hibixin\.com/resource/v\d/my/page$, script-path=https://raw.githubusercontent.com/CodeApe-Xiaoyin/loon-plugins/kelee-snapshot-2026-11-10/vendor/kelee/resources/kelee.one/Resource/JavaScript/Bixin/my_page.js, requires-body=1
+
+[MITM]
+hostname = %APPEND% web.hibixin.com, api.hibixin.com, gateway.hibixin.com, gateway.xxqapp.cn, api.xxqapp.cn, web-bxyuer.bixin.cn, gateway.bxyuer.com

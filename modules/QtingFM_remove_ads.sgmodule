@@ -1,0 +1,31 @@
+#!name=蜻蜓FM去广告（Egern转换版）
+#!desc=移除开屏广告、信息流广告、各类相关内容推荐，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+DOMAIN, ad.qtfm.cn, REJECT
+DOMAIN, adlaunch.qtfm.cn, REJECT
+
+[URL Rewrite]
+^https://app\.qtfm\.cn/recommendapi/v8/ai_assistant_point$ reject-dict
+^https://app\.qtfm\.cn/m-bff/v1/signin/show_homepage_icon$ reject-dict
+^https://app\.qtfm\.cn/recommendapi/v\d/emotion$ reject
+^https://search\.qtfm\.cn/v\d/keyword/default$ reject
+^https://app\.qtfm\.cn/m-bff/v1/user/task/play$ reject-dict
+^https://app\.qtfm\.cn/m-bff/v\d/i_listen/guess_you_like\? reject-dict
+^https://recpage-c\.qtfm\.cn/v\d/favorites$ reject-dict
+^https://user\.qtfm\.cn/u\d/api/v\d/user/following_podcaster\? reject-dict
+^https://entry\.qtfm\.cn/api/v\d/personal/\?carrier reject-dict
+^https://search\.qtfm\.cn/v3/entry$ reject-dict
+^https://woqt2\.qtfm\.cn/v2/userConfig\? reject-dict
+
+[Script]
+QtingFM_remove_ads-op0 = type=http-response, pattern=^https://app\.qtfm\.cn/m-bff/v\d/signin/show_homepage_icon$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/QtingFM_remove_ads.js, requires-body=1, argument=0
+QtingFM_remove_ads-op1 = type=http-response, pattern=^https://app\.qtfm\.cn/recommendapi/v\d/hotpage\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/QtingFM_remove_ads.js, requires-body=1, argument=1
+QtingFM_remove_ads-op2 = type=http-response, pattern=^https://app\.qtfm\.cn/m-bff/v\d/channel/\d{6}/playpage/\d{8}, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/QtingFM_remove_ads.js, requires-body=1, argument=2
+QtingFM_remove_ads-op3 = type=http-response, pattern=^https://app\.qtfm\.cn/m-bff/v\d/mylistenpage, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/QtingFM_remove_ads.js, requires-body=1, argument=3
+QtingFM_remove_ads-op4 = type=http-response, pattern=^https://app\.qtfm\.cn/m-bff/v\d/subscribed_channels\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/QtingFM_remove_ads.js, requires-body=1, argument=4
+QtingFM_remove_ads-op5 = type=http-response, pattern=^https://app\.qtfm\.cn/m-bff/v1/channelpage/\d+$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/QtingFM_remove_ads.js, requires-body=1, argument=5
+
+[MITM]
+hostname = %APPEND% app.qtfm.cn, entry.qtfm.cn, recpage-c.qtfm.cn, user.qtfm.cn, search.qtfm.cn, woqt2.qtfm.cn

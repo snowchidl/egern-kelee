@@ -1,0 +1,9 @@
+#!name=推栏去广告（Egern转换版）
+#!desc=过滤推栏广告｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Script]
+Daily_remove_ads-op0 = type=http-response, pattern=^https?://m\.pvp\.xoyo\.com/conf/server-mapping$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Daily_remove_ads.js, requires-body=1, argument=0
+
+[MITM]
+hostname = %APPEND% m.pvp.xoyo.com

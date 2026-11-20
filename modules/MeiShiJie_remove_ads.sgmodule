@@ -1,0 +1,9 @@
+#!name=美食杰去广告（Egern转换版）
+#!desc=移除开屏广告和信息流广告。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Script]
+MeiShiJie_remove_ads-op0 = type=http-response, pattern=^https://newapi\.meishi\.cc/indexnew/home_feeds, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/MeiShiJie_remove_ads.js, requires-body=1, argument=0
+
+[MITM]
+hostname = %APPEND% newapi.meishi.cc

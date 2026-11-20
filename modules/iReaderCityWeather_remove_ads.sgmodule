@@ -1,0 +1,11 @@
+#!name=天气预报去广告（Egern转换版）
+#!desc=移除开屏广告、弹窗广告、横幅广告、悬浮挂件，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+DOMAIN, adsys.nineton.cn, REJECT
+DOMAIN, adcdn.ccqyj.com, REJECT
+
+[Script]
+iReaderCityWeather_remove_ads-op0 = type=http-response, pattern=^http://weatherapi\.ccqyj\.com/server/listsv\d$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/iReaderCityWeather_remove_ads.js, argument=0
+

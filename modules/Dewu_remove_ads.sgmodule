@@ -1,0 +1,21 @@
+#!name=得物去广告（Egern转换版）
+#!desc=移除开屏广告、弹窗、搜索词填充、热搜榜、猜你想搜、推荐关注、推荐信息流，精简消息中心和我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://app\.dewu\.com/api/v1/app/advertisement/ reject-dict
+^https://app\.dewu\.com/hacking-newbie/v1/app/coupon/module\? reject-dict
+^https://app\.dewu\.com/api/v1/app/search/lexicon/v3/background_words\? reject-dict
+^https://app\.dewu\.com/api/v1/app/search/lexicon/v3/background_words\? reject-dict
+^https://app\.dewu\.com/api/v1/app/search/lexicon/v1/rank_words\? reject-dict
+^https://app\.dewu\.com/sns-rec/v1/attention/feed\? reject-dict
+^https://app\.dewu\.com/sns-rec/v1/search/word-skip/new-list\? reject-dict
+^https://app\.dewu\.com/sns-rec/v1/search/hotword-list\? reject-dict
+
+[Script]
+Dewu_remove_ads-op0 = type=http-response, pattern=^https://app\.dewu\.com/api/v1/app/biz-aggregate/me/user-index\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Dewu_remove_ads.js, requires-body=1, argument=0
+Dewu_remove_ads-op1 = type=http-response, pattern=^https://app\.dewu\.com/api/v1/app/account/wallet/page/entrance\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Dewu_remove_ads.js, requires-body=1, argument=1
+Dewu_remove_ads-op2 = type=http-response, pattern=^https://app\.dewu\.com/identify-discovery/v1/discovery/index\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Dewu_remove_ads.js, requires-body=1, argument=2
+
+[MITM]
+hostname = %APPEND% app.dewu.com

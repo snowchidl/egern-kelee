@@ -1,0 +1,10 @@
+#!name=Dlabel云标签去广告（Egern转换版）
+#!desc=移除开屏广告及首页横幅。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://dlabel\.ctaiot\.com/api/spreadstart/list\.json\? reject-dict
+^https://dlabel\.ctaiot\.com/api/spread/journey/select\.json\? reject-dict
+
+[MITM]
+hostname = %APPEND% dlabel.ctaiot.com

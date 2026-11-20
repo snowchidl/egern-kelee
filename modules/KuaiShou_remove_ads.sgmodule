@@ -1,0 +1,20 @@
+#!name=快手去广告（Egern转换版）
+#!desc=移除开屏广告、视频流广告、底栏皮肤、右下角悬浮推广，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://(apissl|az\d-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com/rest/n/nearby/widget/info\? reject-dict
+^https://(apissl|az\d-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com/rest/n/taskCenter/task/report\? reject-dict
+^https://(apissl|az\d-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com/rest/n/ad/ reject-dict
+^https://(apissl|az\d-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com/rest/n/live/feed/info/simplelive/card\? reject-dict
+
+[Script]
+KuaiShou_remove_ads-op0 = type=http-response, pattern=^https://(apissl|az\d-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com/rest/system/startup\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/KuaiShou_remove_ads.js, requires-body=1, argument=0
+KuaiShou_remove_ads-op1 = type=http-response, pattern=^https://(apissl|az\d-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com/rest/system/startup\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/KuaiShou_remove_ads.js, requires-body=1, argument=1
+KuaiShou_remove_ads-op2 = type=http-response, pattern=^https://(apissl|az\d-live|az\d-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com/rest/n/live/feed/square/refresh\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/KuaiShou_remove_ads.js, requires-body=1, argument=2
+KuaiShou_remove_ads-op3 = type=http-response, pattern=^https://(apissl|az\d-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com/rest/n/feed/(selection|selectionFast)\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/KuaiShou_remove_ads.js, requires-body=1, argument=3
+KuaiShou_remove_ads-op4 = type=http-response, pattern=^https://(apissl|az\d-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com/rest/n/user/profile/v2\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/KuaiShou_remove_ads.js, requires-body=1, argument=4
+KuaiShou_remove_ads-op5 = type=http-response, pattern=^https://(apissl|az\d-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com/rest/im/wd/top/navigation/getRecommendedSession\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/KuaiShou_remove_ads.js, requires-body=1, argument=5
+
+[MITM]
+hostname = %APPEND% az*-api.ksapisrv.com, az4-api-idc.ksapisrv.com, az*-api-idc.ksapisrv.com, apissl.gifshow.com, apissl.ksapisrv.com, az*-api-js.gifshow.com, az*-live.ksapisrv.com

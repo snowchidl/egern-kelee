@@ -1,0 +1,31 @@
+#!name=百度贴吧去广告（Egern转换版）
+#!desc=移除开屏广告、信息流广告和帖内广告，精简侧拉抽屉及我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+DOMAIN, 180.76.76.200, REJECT
+IP-CIDR, 180.76.76.200/32, REJECT, no-resolve
+
+[URL Rewrite]
+^https?://tiebac\.baidu\.com/c/f/forum/getInterestClassList$ reject-dict
+^https?://tiebac\.baidu\.com/c/f/search/discover$ reject-dict
+^https?://tieba\.baidu\.com/c/f/search/discover$ reject-dict
+^https://tieba\.baidu\.com/c/f/forum/getForumAlbum$ reject-dict
+^http://c\.tieba\.baidu\.com/c/f/forum/hotforum$ reject-dict
+
+[Script]
+Tieba_remove_ads-op0 = type=http-response, pattern=^https?://tiebac\.baidu\.com/c/s/sync$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Tieba_remove_ads.js, requires-body=1, argument=0
+Tieba_remove_ads-op1 = type=http-response, pattern=^https?://tiebac\.baidu\.com/c/s/sync$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Tieba_remove_ads.js, requires-body=1, argument=1
+Tieba_remove_ads-op2 = type=http-response, pattern=^https?://tiebac\.baidu\.com/c/s/sync$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Tieba_remove_ads.js, requires-body=1, argument=2
+Tieba_remove_ads-op3 = type=http-response, pattern=^https?://tieba\.baidu\.com/mo/q/search/startPage\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Tieba_remove_ads.js, argument=3
+Tieba_remove_ads-op4 = type=http-response, pattern=^https?://tiebac\.baidu\.com/c/u/user/profile$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Tieba_remove_ads.js, requires-body=1, argument=4
+Tieba_remove_ads-op5 = type=http-response, pattern=^https?://tiebac\.baidu\.com/c/u/user/profile$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Tieba_remove_ads.js, requires-body=1, argument=5
+Tieba_remove_ads-op6 = type=http-response, pattern=^https?://tiebac\.baidu\.com/c/u/user/profile$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Tieba_remove_ads.js, requires-body=1, argument=6
+Tieba_remove_ads-op7 = type=http-response, pattern=^https?://tieba\.baidu\.com/c/f/forum/forumGuide$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Tieba_remove_ads.js, requires-body=1, argument=7
+Tieba_remove_ads-op8 = type=http-response, pattern=^https?://tieba\.baidu\.com/c/f/frs/frsBottom\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Tieba_remove_ads.js, requires-body=1, argument=8
+Tieba_remove_ads-op9 = type=http-response, pattern=^https?://tiebac\.baidu\.com/c/f/frs/frsBottom$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Tieba_remove_ads.js, requires-body=1, argument=9
+Tieba_remove_ads-op10 = type=http-response, pattern=^https?://tiebac\.baidu\.com/c/f/sidebar/home$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Tieba_remove_ads.js, requires-body=1, argument=10
+ProtoBuf处理 = type=http-response, pattern=^https?://tieba(?:c)?\.baidu\.com/c/(f/excellent/personalized|f/frs/page|b/ad/adBid|f/ad/getFeedAd|f/pb/page|f/frs/generalTabList)\?cmd=\d+&format=protobuf, script-path=https://raw.githubusercontent.com/CodeApe-Xiaoyin/loon-plugins/kelee-snapshot-2026-11-10/vendor/kelee/resources/kelee.one/Resource/JavaScript/Tieba/tieba-proto.js, requires-body=1, binary-body-mode=1
+
+[MITM]
+hostname = %APPEND% tiebac.baidu.com, tieba.baidu.com

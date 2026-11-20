@@ -1,0 +1,12 @@
+#!name=360智慧生活去广告（Egern转换版）
+#!desc=移除开屏广告、首页推广横幅、商城入口及我的页面推广。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+DOMAIN, ad.iot.360.cn, REJECT
+
+[URL Rewrite]
+^https://app\.home\.360\.cn/v1/config/custom_config reject-dict
+
+[MITM]
+hostname = %APPEND% app.home.360.cn

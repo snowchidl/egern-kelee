@@ -1,0 +1,15 @@
+#!name=有道翻译官去广告（Egern转换版）
+#!desc=移除开屏广告、横幅推广，精简首页。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://gorgon\.youdao\.com/gorgon/v2/request\.s reject-dict
+^https://gorgon\.youdao\.com/gorgon/brand/prefetch\.s reject-dict
+^https://gorgon\.youdao\.com/gorgon/request\.s reject-dict
+^https://fanyiguan-server\.youdao\.com/server/banner\? reject-dict
+^https://dict\.youdao\.com/vip/activity/fanyiguan/sevendayfree/imei\? reject-dict
+^https://dict\.youdao\.com/wordbook/recommend\?all=false reject-dict
+^https://api-overmind\.youdao\.com/openapi/get/luna/dict/trans_abtest/online/iOS\? reject-dict
+
+[MITM]
+hostname = %APPEND% gorgon.youdao.com, fanyiguan-server.youdao.com, api-overmind.youdao.com, dict.youdao.com

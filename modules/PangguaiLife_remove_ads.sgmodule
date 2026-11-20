@@ -1,0 +1,18 @@
+#!name=胖乖生活去广告（Egern转换版）
+#!desc=移除开屏广告、横幅轮播图、网格广告、信息流广告、浮窗广告，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://userapi\.qiekj\.com/slot/get$ reject-dict
+^https://userapi\.qiekj\.com/appTitle/get$ reject-dict
+^https://userapi\.qiekj\.com/integralRecord/integralDailStatistics$ reject-dict
+^https://userapi\.qiekj\.com/local-life/category$ reject-dict
+^https://userapi\.qiekj\.com/integralGoods/queryIntegralGoodsPage$ reject-dict
+^https://userapi\.qiekj\.com/task/list$ reject-dict
+
+[Script]
+PangguaiLife_remove_ads-op0 = type=http-response, pattern=^https://userapi\.qiekj\.com/local-life/tab-order$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/PangguaiLife_remove_ads.js, requires-body=1, argument=0
+PangguaiLife_remove_ads-op1 = type=http-response, pattern=^https://userapi\.qiekj\.com/integralGoods/queryIntegralGoodsCategoryList$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/PangguaiLife_remove_ads.js, requires-body=1, argument=1
+
+[MITM]
+hostname = %APPEND% userapi.qiekj.com

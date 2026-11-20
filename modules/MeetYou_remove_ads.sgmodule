@@ -1,0 +1,16 @@
+#!name=美柚去广告（Egern转换版）
+#!desc=移除开屏广告、弹窗推广和信息流推广，移除青少年模式弹窗和我的页面推广。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+DOMAIN, ad.seeyouyima.com, REJECT
+DOMAIN, axxd.xmseeyouyima.com, REJECT
+
+[URL Rewrite]
+^https://circle\.(xm)?seeyouyima\.com/v\d/article_recommend\? reject
+
+[Script]
+MeetYou_remove_ads-op0 = type=http-response, pattern=^https://common\.seeyouyima\.com/v2/conf_list$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/MeetYou_remove_ads.js, requires-body=1, argument=0
+
+[MITM]
+hostname = %APPEND% circle.seeyouyima.com, circle.xmseeyouyima.com, common.seeyouyima.com

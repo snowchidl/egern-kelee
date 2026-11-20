@@ -1,0 +1,40 @@
+#!name=知乎去广告（Egern转换版）
+#!desc=移除HTTPDNS和QUIC传输配置，移除开屏广告、信息流广告、回答页广告，移除回答页下的相关回答、专栏卡片及圈子卡片，移除直答页面推荐知识库和提问推荐，移除评论区评论氛围满意度调查，精简首页顶部标签及我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://api\.zhihu\.com/ad-style-service/request$ reject-dict
+^https://api\.zhihu\.com/commercial_api/ reject-dict
+^https://api\.zhihu\.com/commercial_api/banners_v\d/app_float_corner\? reject-dict
+^https://api\.zhihu\.com/next-render\?id=\d+&type=answer reject-dict
+^https://api\.zhihu\.com/commercial_api/answer/\d+/bottom-v\d$ reject-dict
+^https://api\.zhihu\.com/related_recommend/feed/waterfall\? reject-dict
+^https://api\.zhihu\.com/search/preset_words\? reject-dict
+^https://api\.zhihu\.com/search/related_queries/question/\d+$ reject-dict
+^https://zhida\.zhihu\.com/ai_ingress/knowledge/square/categories/feeds\?categoryId=1%7D$ reject-dict
+^https://zhida\.zhihu\.com/ai_ingress/ai_chat/guidance$ reject-dict
+^https://api\.zhihu\.com/content-distribution-core/bubble/common/show$ reject-dict
+^https://www\.zhihu\.com/api/v\d/members/homepage_card$ reject-dict
+^https://api\.zhihu\.com/people/homepage_entry_v\d$ reject-dict
+^https://api\.zhihu\.com/kvip/right/my_card\? reject-dict
+^https://api\.zhihu\.com/unlimited/go/my_card/v\d\? reject-dict
+
+[Script]
+Zhihu_remove_ads-op0 = type=http-response, pattern=^https://m-cloud\.zhihu\.com/api/cloud/zhihu/config/all\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhihu_remove_ads.js, requires-body=1, argument=0
+Zhihu_remove_ads-op1 = type=http-response, pattern=^https://api\.zhihu\.com/root/tab/v\d(?:\?.+)?$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhihu_remove_ads.js, requires-body=1, argument=1
+Zhihu_remove_ads-op2 = type=http-response, pattern=^https://api\.zhihu\.com/topstory/recommend\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhihu_remove_ads.js, requires-body=1, argument=2
+Zhihu_remove_ads-op3 = type=http-response, pattern=^https://api\.zhihu\.com/questions/\d+/feeds\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhihu_remove_ads.js, requires-body=1, argument=3
+Zhihu_remove_ads-op4 = type=http-response, pattern=^https://api\.zhihu\.com/comment_v\d/(answers|pins)/\d+/root_comment\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhihu_remove_ads.js, requires-body=1, argument=4
+Zhihu_remove_ads-op5 = type=http-response, pattern=^https://(api|page-info)(?:\.zhihu)?\.com/answers/v\d/\d+(?:\?.*)?$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhihu_remove_ads.js, requires-body=1, argument=5
+Zhihu_remove_ads-op6 = type=http-response, pattern=^https://(api|page-info)(?:\.zhihu)?\.com/answers/v\d/\d+(?:\?.*)?$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhihu_remove_ads.js, requires-body=1, argument=6
+Zhihu_remove_ads-op7 = type=http-response, pattern=^https://api\.zhihu\.com/topstory/recommend\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhihu_remove_ads.js, requires-body=1, argument=7
+Zhihu_remove_ads-op8 = type=http-response, pattern=^https://api\.zhihu\.com/(articles|answers|pins)/v\d/\d+\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhihu_remove_ads.js, requires-body=1, argument=8
+Zhihu_remove_ads-op9 = type=http-response, pattern=^https://api\.zhihu\.com/comment_v\d/answers/\d+/list-headers$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhihu_remove_ads.js, requires-body=1, argument=9
+Zhihu_remove_ads-op10 = type=http-response, pattern=^https://api\.zhihu\.com/podcasts/hub/v\d$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhihu_remove_ads.js, requires-body=1, argument=10
+Zhihu_remove_ads-op11 = type=http-response, pattern=^https://api\.zhihu\.com/search/recommend_query/v\d\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhihu_remove_ads.js, requires-body=1, argument=11
+Zhihu_remove_ads-op12 = type=http-response, pattern=^https://api\.zhihu\.com/search_v\d\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhihu_remove_ads.js, requires-body=1, argument=12
+Zhihu_remove_ads-op13 = type=http-response, pattern=^https://api\.zhihu\.com/search/tabs\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhihu_remove_ads.js, requires-body=1, argument=13
+Zhihu_remove_ads-op14 = type=http-response, pattern=^https://api\.zhihu\.com/people/self$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Zhihu_remove_ads.js, requires-body=1, argument=14
+
+[MITM]
+hostname = %APPEND% m-cloud.zhihu.com, api.zhihu.com, www.zhihu.com, page-info.zhihu.com, zhida.zhihu.com

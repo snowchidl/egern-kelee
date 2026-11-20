@@ -1,0 +1,18 @@
+#!name=触站去广告（Egern转换版）
+#!desc=移除开屏广告、弹窗广告、各页面横幅推广，移除首页悬浮挂件。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://app\.huashi6\.com/app/index/ad/ reject-dict
+^https://app\.huashi6\.com/app/works/relative$ reject-dict
+^https://app\.huashi6\.com/app/index/follow/all_random/list$ reject-dict
+^https://app\.huashi6\.com/app/index/csyxh/icon$ reject-dict
+
+[Script]
+Chuzhan_remove_ads-op0 = type=http-response, pattern=^https://app\.huashi6\.com/app/common/config$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Chuzhan_remove_ads.js, requires-body=1, argument=0
+Chuzhan_remove_ads-op1 = type=http-response, pattern=^https://app\.huashi6\.com/app/common/config$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Chuzhan_remove_ads.js, requires-body=1, argument=1
+Chuzhan_remove_ads-op2 = type=http-response, pattern=^https://app\.huashi6\.com/app/common/layouts$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Chuzhan_remove_ads.js, requires-body=1, argument=2
+Chuzhan_remove_ads-op3 = type=http-response, pattern=^https://app\.huashi6\.com/app/common/themeConfig$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Chuzhan_remove_ads.js, requires-body=1, argument=3
+
+[MITM]
+hostname = %APPEND% app.huashi6.com

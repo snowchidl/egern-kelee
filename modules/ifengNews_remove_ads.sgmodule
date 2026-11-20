@@ -1,0 +1,32 @@
+#!name=凤凰新闻去广告（Egern转换版）
+#!desc=移除皮肤、开屏广告、信息流广告、文末广告、视频流广告、评论区广告，移除信息流订阅号文章、文末推荐阅读，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://nine\.ifeng\.com/adPreload\? reject-dict
+^https://nine\.ifeng\.com/startUpAdPrestrainList\? reject-dict
+^https://nine\.ifeng\.com/startUpAddAd\? reject-dict
+^https://config\.nine\.ifeng\.com/news/h5prepublish\? reject
+^https://nine\.ifeng\.com/searchhotwordsrollv\d\? reject-dict
+^https://nine\.ifeng\.com/searchvideohotwordsroll\? reject-dict
+^https://nine\.ifeng\.com/searchHotwordsReact\? reject-dict
+^https://user\.iclient\.ifeng\.com/active_task/channel\? reject-dict
+^https://nine\.ifeng\.com/newRelatedDocs\? reject-dict
+^https://nine\.ifeng\.com/getdocbackinfo\? reject-dict
+^https://user\.iclient\.ifeng\.com/event_protal/list_lite\? reject-dict
+^https://nine\.ifeng\.com/adVideoImmersionWindow\? reject-dict
+
+[Script]
+ifengNews_remove_ads-op0 = type=http-response, pattern=^https://config\.nine\.ifeng\.com/news/cow\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ifengNews_remove_ads.js, requires-body=1, argument=0
+ifengNews_remove_ads-op1 = type=http-response, pattern=^https://config\.nine\.ifeng\.com/news/cow\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ifengNews_remove_ads.js, requires-body=1, argument=1
+ifengNews_remove_ads-op2 = type=http-response, pattern=^https://config\.nine\.ifeng\.com/news/channel\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ifengNews_remove_ads.js, requires-body=1, argument=2
+ifengNews_remove_ads-op3 = type=http-response, pattern=^https://config\.nine\.ifeng\.com/news/channel\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ifengNews_remove_ads.js, requires-body=1, argument=3
+ifengNews_remove_ads-op4 = type=http-response, pattern=^https://nine\.ifeng\.com/headline\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ifengNews_remove_ads.js, requires-body=1, argument=4
+ifengNews_remove_ads-op5 = type=http-response, pattern=^https://nine\.ifeng\.com/getNewsDocs\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ifengNews_remove_ads.js, requires-body=1, argument=5
+ifengNews_remove_ads-op6 = type=http-response, pattern=^https://nine\.ifeng\.com/phoenixTvChannel\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ifengNews_remove_ads.js, requires-body=1, argument=6
+ifengNews_remove_ads-op7 = type=http-response, pattern=^https://nine\.ifeng\.com/videoimmersionlistv\d\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ifengNews_remove_ads.js, requires-body=1, argument=7
+ifengNews_remove_ads-op8 = type=http-response, pattern=^https://nine\.ifeng\.com/shortList\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ifengNews_remove_ads.js, requires-body=1, argument=8
+ifengNews_remove_ads-op9 = type=http-response, pattern=^https://comment\.ifeng\.com/v\d/get/commentlist\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/ifengNews_remove_ads.js, requires-body=1, argument=9
+
+[MITM]
+hostname = %APPEND% nine.ifeng.com, config.nine.ifeng.com, user.iclient.ifeng.com, comment.ifeng.com

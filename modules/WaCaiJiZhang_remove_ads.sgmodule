@@ -1,0 +1,11 @@
+#!name=挖财记账去广告（Egern转换版）
+#!desc=移除弹窗广告、推广语横幅和右下角悬浮广告。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://jz\.wacaijizhang\.com/api/banners/ribbon\? reject-dict
+^https://jz\.wacaijizhang\.com/api/banners/list\? reject-dict
+^https://jz\.wacaijizhang\.com/api/resource/universal/fetch$ reject-dict
+
+[MITM]
+hostname = %APPEND% jz.wacaijizhang.com

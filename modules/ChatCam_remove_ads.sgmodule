@@ -1,0 +1,10 @@
+#!name=看家王去广告（Egern转换版）
+#!desc=移除开屏广告、横幅广告。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://fast\.jfgou\.com:1443/api/web/v\d/no/app/advertisement/ reject-dict
+^https://jiafeigou-1251885898\.cos\.ap-guangzhou\.myqcloud\.com/forever/web_server/app_config/banner_\d+ reject
+
+[MITM]
+hostname = %APPEND% fast.jfgou.com, jiafeigou-1251885898.cos.ap-guangzhou.myqcloud.com

@@ -1,0 +1,10 @@
+#!name=知识星球去水印（Egern转换版）
+#!desc=移除内容的水印编号｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Script]
+UnnooQuan_remove_watermark-op0 = type=http-response, pattern=^https://api\.zsxq\.com/v2/groups/\d+$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/UnnooQuan_remove_watermark.js, requires-body=1, argument=0
+UnnooQuan_remove_watermark-op1 = type=http-response, pattern=^https://articles\.zsxq\.com/inline_form/id_[a-z0-9]+\.html, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/UnnooQuan_remove_watermark.js, requires-body=1, argument=1
+
+[MITM]
+hostname = %APPEND% api.zsxq.com

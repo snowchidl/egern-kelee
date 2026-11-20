@@ -1,0 +1,9 @@
+#!name=小店掌柜去广告（Egern转换版）
+#!desc=移除开屏广告、活动推广和页面跳转。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://mch\.juhesaas\.com/api/advertisement/ reject-dict
+
+[MITM]
+hostname = %APPEND% mch.juhesaas.com

@@ -1,0 +1,40 @@
+#!name=芒果TV去广告（Egern转换版）
+#!desc=移除开屏广告、信息流广告、播放页广告，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[Rule]
+DOMAIN, credits.bz.mgtv.com, REJECT
+DOMAIN, credits2.bz.mgtv.com, REJECT
+DOMAIN, credits3.bz.mgtv.com, REJECT
+DOMAIN, dflow.bz.mgtv.com, REJECT
+DOMAIN, encounter.bz.mgtv.com, REJECT
+DOMAIN, floor.bz.mgtv.com, REJECT
+DOMAIN, layer.bz.mgtv.com, REJECT
+DOMAIN, mob.bz.mgtv.com, REJECT
+DOMAIN, rc-topic-api.bz.mgtv.com, REJECT
+DOMAIN, rprain.bz.mgtv.com, REJECT
+DOMAIN, rprain.log.mgtv.com, REJECT
+DOMAIN, vip.bz.mgtv.com, REJECT
+DOMAIN-SUFFIX, da.mgtv.com, REJECT
+
+[URL Rewrite]
+^https://dc\.bz\.mgtv\.com/dynamic/v\d/skin/config\? reject-dict
+^https://dc\.bz\.mgtv\.com/dynamic/v\d/channel/ads\? reject-dict
+^http://mobileso\.bz\.mgtv\.com/spotlight/search/v\d\? reject-dict
+^https://damang\.api\.mgtv\.com/station/album/red/dot\? reject-dict
+^https://hb-boom\.api\.mgtv\.com/release/pullReleaseInfo$ reject-dict
+^https://mobile\.api\.mgtv\.com/v\d/mobile/checkUpdate\? reject-dict
+^https?://mobileso\.bz\.mgtv\.com/mobile/recommend/v\d\? reject-dict
+
+[Script]
+MangoTV_remove_ads-op0 = type=http-response, pattern=^https?://mobile\.api\.(mgtv|hunantv)\.com/mobile/config\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/MangoTV_remove_ads.js, requires-body=1, argument=0
+MangoTV_remove_ads-op1 = type=http-response, pattern=^https://me\.bz\.mgtv\.com/v3/module/list\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/MangoTV_remove_ads.js, requires-body=1, argument=1
+MangoTV_remove_ads-op2 = type=http-response, pattern=^https://me\.bz\.mgtv\.com/v4/module/list\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/MangoTV_remove_ads.js, requires-body=1, argument=2
+MangoTV_remove_ads-op3 = type=http-response, pattern=^https?://dc\d?\.bz\.mgtv\.com/dynamic/v\d/channel/index/\w, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/MangoTV_remove_ads.js, requires-body=1, argument=3
+MangoTV_remove_ads-op4 = type=http-response, pattern=^https?://dc\d?\.bz\.mgtv\.com/dynamic/v\d/channel/index/\w, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/MangoTV_remove_ads.js, requires-body=1, argument=4
+MangoTV_remove_ads-op5 = type=http-response, pattern=^https://mobile-thor\.api\.mgtv\.com/v\d+/vod/info\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/MangoTV_remove_ads.js, requires-body=1, argument=5
+MangoTV_remove_ads-op6 = type=http-response, pattern=^https://mobile-thor\.api\.mgtv\.com/v\d+/vod/info\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/MangoTV_remove_ads.js, requires-body=1, argument=6
+MangoTV_remove_ads-op7 = type=http-response, pattern=^https://comment\.mgtv\.com/v\d/comment/getCommentList\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/MangoTV_remove_ads.js, requires-body=1, argument=7
+
+[MITM]
+hostname = %APPEND% dc?.bz.mgtv.com, mobileso.bz.mgtv.com, damang.api.mgtv.com, hb-boom.api.mgtv.com, mobile.api.mgtv.com, mobile.api.hunantv.com, me.bz.mgtv.com, mobile-thor.api.mgtv.com

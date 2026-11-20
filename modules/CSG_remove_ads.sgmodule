@@ -1,0 +1,13 @@
+#!name=南网在线去广告（Egern转换版）
+#!desc=移除首页推广，精简搜索页和我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://95598\.csg\.cn/mp/ucs/ma/zt/content/queryHotInformations$ reject-dict
+^https://95598\.csg\.cn/mp/mpaas/rubik/openapi/rubik/mobile/getRubikScene$ reject-dict
+
+[Script]
+CSG_remove_ads-op0 = type=http-response, pattern=^https://95598\.csg\.cn/mp/mpaas/mgw\.htm$, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/CSG_remove_ads.js, requires-body=1, argument=0
+
+[MITM]
+hostname = %APPEND% 95598.csg.cn

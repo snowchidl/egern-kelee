@@ -1,0 +1,12 @@
+#!name=马克水印相机去广告（Egern转换版）
+#!desc=移除开屏广告，拍摄首页悬浮挂件，侧边栏横幅广告。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://marki\.markiapp\.com/mkg/MomStats/getFlowWindowList$ reject-dict
+^https?://marki\.markiapp\.com/mkg/Advertising/ reject-dict
+^https://marki\.markiapp\.com/mkg/MomStats/getIntegralAdv$ reject-dict
+^https://market-callback\.markiapp\.com/adcenter/ reject-dict
+
+[MITM]
+hostname = %APPEND% marki.markiapp.com, market-callback.markiapp.com

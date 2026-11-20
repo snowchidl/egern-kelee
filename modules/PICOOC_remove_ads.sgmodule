@@ -1,0 +1,13 @@
+#!name=PICOOC去广告（Egern转换版）
+#!desc=移除开屏广告、悬浮广告，拦截发现页，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://api2\.picooc\.com/v\d/api/focus/strategy/execute\? reject-dict
+^https://api2\.picooc\.com/v\d/api/dietGuide/query\? reject-dict
+^https://api2\.picooc\.com/program/listMainProgram\? reject-dict
+^https://a\.picooc\.com/v\d/api/camp/sys/config/coupon/pattern\? reject-dict
+^https://api2\.picooc\.com/v\d/api/account/getTabsInfo\? reject-dict
+
+[MITM]
+hostname = %APPEND% api2.picooc.com, a.picooc.com

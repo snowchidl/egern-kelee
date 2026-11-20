@@ -1,0 +1,9 @@
+#!name=有道云笔记去广告（Egern转换版）
+#!desc=移除开屏广告、弹窗广告及横幅广告。｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://silk\.lx\.netease\.com/api/open/advertOpen/ reject-dict
+
+[MITM]
+hostname = %APPEND% silk.lx.netease.com
