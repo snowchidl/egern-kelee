@@ -1,0 +1,10 @@
+#!name=知乎去开屏（定制版）
+#!desc=只去开屏广告：拦截知乎广告下发接口（commercial_api 商业广告接口、ad-style-service 广告样式接口，开屏广告经此下发）。原全量版的信息流广告、回答页广告、评论区处理、首页顶部标签与我的页面精简、HTTPDNS/QUIC 传输配置清理等功能已全部移除。｜小九定制：由自托管全量版 extras/Zhihu_remove_ads.egern.sgmodule 精简而来，旧文件保留不动｜源：可莉 Loon 插件 2026-11-10 快照，已转换为 Surge/Egern 模块
+#!category=去广告
+
+[URL Rewrite]
+^https://api\.zhihu\.com/ad-style-service/request$ reject-dict
+^https://api\.zhihu\.com/commercial_api/ reject-dict
+
+[MITM]
+hostname = %APPEND% api.zhihu.com

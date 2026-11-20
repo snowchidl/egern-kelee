@@ -1,0 +1,14 @@
+#!name=屏蔽 iOS 系统更新（Egern版）
+#!desc=屏蔽 iOS/iPadOS 系统更新，无 iPad 设备可在「主机名」添加「-mesu.apple.com」｜源：Tartarus2014/Loon-Script 的 Block Update 插件（原作者 ConnersHua），已转换为 Surge/Egern 模块
+#!category=工具
+#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
+#!homepage=https://github.com/Tartarus2014/Loon-Script
+
+[Rule]
+DOMAIN,gdmf.apple.com,REJECT
+
+[URL Rewrite]
+^https://mesu\.apple\.com/assets/com_apple_MobileAsset_SoftwareUpdate/com_apple_MobileAsset_SoftwareUpdate\.xml reject-404
+
+[MITM]
+hostname = %APPEND% mesu.apple.com
