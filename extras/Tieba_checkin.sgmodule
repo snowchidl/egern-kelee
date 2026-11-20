@@ -1,0 +1,10 @@
+#!name=百度贴吧签到
+#!desc=自动签到贴吧、百度知道（脚本：chavyleung）｜首次使用：开着本模块打开一次贴吧 App 抓登录态，之后每天 00:10 自动签到
+#!category=签到
+
+[Script]
+百度贴吧登录态 = type=http-request, pattern=^https?:\/\/tieba\.baidu\.com\/?.?, script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/tieba/tieba.cookie.js
+百度贴吧签到 = type=cron, cronexp="10 0 * * *", script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/tieba/tieba.js, wake-system=1
+
+[MITM]
+hostname = %APPEND% tieba.baidu.com
