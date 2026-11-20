@@ -1,0 +1,13 @@
+#!name=夸克去广告（Egern转换版）
+#!desc=移除阅读广告、各页面弹窗及横幅，精简我的页面。｜源：可莉 Loon 插件 2026-11-10 快照，声明式规则已逐条翻成 JS
+#!category=去广告
+
+[URL Rewrite]
+^https://stars\.shuqireader\.com/kkios/render/load/resource/app$ reject-dict
+^https://stars\.shuqireader\.com/kkios/render/load/resource/appConfig$ reject-dict
+
+[Script]
+夸克去广告-转换1 = type=http-response, pattern=^https://open-cms-api\.quark\.cn/open-cms\?, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/QuarkBrowser.js, requires-body=1
+
+[MITM]
+hostname = %APPEND% open-cms-api.quark.cn, stars.shuqireader.com

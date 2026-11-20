@@ -1,0 +1,18 @@
+#!name=菜鸟去广告（Egern转换版）
+#!desc=过滤菜鸟广告｜源：可莉 Loon 插件 2026-11-10 快照，声明式规则已逐条翻成 JS
+#!category=去广告
+
+[URL Rewrite]
+^https://nbcps-mtop\.cainiao\.com/gw/mtop\.cainiao\.nbcps\.presentation\.fetch\.cn reject
+^https://netflow-mtop\.cainiao\.com/gw/mtop\.cainiao\.guoguo\.nbnetflow\.ads\.index reject
+^https://cn-acs\.m\.cainiao\.com/gw/mtop\.cainiao\.adkeyword\.get\.cn reject
+^https://cn-acs\.m\.cainiao\.com/gw/mtop\.cainiao\.guoguo\.nbnetflow\.ads\.m?show reject
+
+[Script]
+菜鸟去广告-转换1 = type=http-response, pattern=^https://(cn-acs\.m|e2e-mtop)\.cainiao\.com/gw/mtop\.cainiao\.app\.e2e\.engine\.page\.fetch, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Cainiao.js, requires-body=1
+菜鸟去广告-转换2 = type=http-response, pattern=^https://e2e-mtop\.cainiao\.com/gw/mtop\.cainiao\.app\.e2e\.engine\.page\.fetch\.cn, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Cainiao.js, requires-body=1
+菜鸟去广告-转换3 = type=http-response, pattern=^https://longquan-mtop\.cainiao\.com/gw/mtop\.com\.cainiao\.longquan\.place\.getpageresourcecontent\.cn, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Cainiao.js, requires-body=1
+菜鸟去广告-转换4 = type=http-response, pattern=^https://netflow-mtop\.cainiao\.com/gw/mtop\.cainiao\.guoguo\.nbnetflow\.ads, script-path=https://raw.githubusercontent.com/snowchidl/egern-kelee/main/js/Cainiao.js, requires-body=1
+
+[MITM]
+hostname = %APPEND% netflow-mtop.cainiao.com, nbcps-mtop.cainiao.com, cn-acs.m.cainiao.com, e2e-mtop.cainiao.com, longquan-mtop.cainiao.com
