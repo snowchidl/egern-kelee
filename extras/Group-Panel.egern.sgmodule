@@ -1,0 +1,23 @@
+#!name=Group-Panel 节点切换面板（Egern预设版）
+
+#!desc=在面板里快速切换策略组节点｜Egern 适配：GROUP 已预设为 Manual 组（原版默认是占位文字、必须手改），其余与原版一致。原作者 Rabbit-Spec / Moore。
+
+#!category=深巷有喵的模块
+
+#!arguments=GROUP:Manual,ICON:network,COLOR:#86ABEE
+
+#!arguments-desc=[参数设置]\n\n⓵ GROUP: 策略组名称（已预设 Manual，想管别的组改这里）。\n\n⓶ ICON: 自定义面板图标,需为有效的SFSymbolName,如不设置则默认。\n\n⓷ COLOR: 自定义图标颜色,需为颜色的HEX编码。
+
+# 更新日期：2024.09.09
+
+# 版本：3.3
+
+
+[Panel]
+
+Group-Panel = script-name=Group-Panel,update-interval=1
+
+
+[Script]
+
+Group-Panel = type=generic,timeout=10,script-path=https://raw.githubusercontent.com/Rabbit-Spec/Surge/Master/Module/Panel/Group-Panel/Moore/Group-Panel.js,argument=icon={{{ICON}}}&color={{{COLOR}}}&group={{{GROUP}}}

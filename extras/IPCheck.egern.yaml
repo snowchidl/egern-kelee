@@ -1,0 +1,54 @@
+name: "IP 质检"
+
+description: "双源节点 IP 质检（Net.Coffee + IPFinal），Apple HIG 轻量现代设计，支持双源并列或单源查询；分流覆盖 70+ IP 检测站点｜Egern 适配：检测策略 Proxy 已预设为 Manual 组（原版默认 DIRECT），其余与原版一致。原作者 Likhixang/Egerny。"
+
+# 策略组路由参数（用于规则匹配）
+compat_arguments:
+  Proxy: "Manual"
+compat_arguments_desc: |
+  Proxy: 检测请求走的策略组，已预设 Manual（查当前手动选的那个节点的 IP）；想查别的组在模块参数里改组名
+
+# 模块可视化配置控件 (Egern 2.16+)
+env_schema:
+  Source:
+    name: 数据源
+    description: "默认双源并列对比；也可只查 Net.Coffee 或只查 IPFinal"
+    default_value: "双源"
+    options:
+      - "双源"
+      - "Net.Coffee"
+      - "IPFinal"
+  MarkIP:
+    name: IP 打码
+    description: "是否对 IP 地址打码显示"
+    options:
+      - "true"
+      - "false"
+
+scriptings:
+  - generic:
+      name: IPCheck
+      script_url: https://raw.githubusercontent.com/Likhixang/Egerny/main/js/IPCheck-widget.js
+      timeout: 20
+      update_interval: 300
+      env:
+        Source: "双源"
+        MarkIP: "false"
+
+widgets:
+  - name: IPCheck
+    script_name: IPCheck
+
+rules:
+  # 脚本自身数据源：内联兜底，规则集未就绪或拉取失败时脚本仍走选定策略
+  - domain_suffix:
+      match: ip.net.coffee
+      policy: "{{{Proxy}}}"
+  - domain_suffix:
+      match: ipfinal.com
+      policy: "{{{Proxy}}}"
+  # 其余 IP 检测站点的分流清单（Surge 规则集格式，Egern 原生支持）
+  - rule_set:
+      match: https://raw.githubusercontent.com/Likhixang/Egerny/main/rules/IPCheck.list
+      policy: "{{{Proxy}}}"
+      update_interval: 86400
