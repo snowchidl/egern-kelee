@@ -1,4 +1,4 @@
-# egern-kelee
+# Egern自用配置
 
 可莉（Kelee）Loon 插件全量转换为 Surge / Egern 格式的模块仓库。
 
